@@ -1,12 +1,12 @@
 import logo from '../assets/logo.png';
 
-const HomePage = () => {
+const MainPage = () => {
   return (
     <div className='section'>
       <img src={logo} alt='' />
-      <div>HomePage</div>
+      <div>MainPage</div>
     </div>
   );
 };
 
-export default HomePage;
+export default MainPage;

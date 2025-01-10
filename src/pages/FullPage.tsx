@@ -1,5 +1,5 @@
 import ReactFullpage from '@fullpage/react-fullpage';
-import HomePage from './HomePage';
+import MainPage from './MainPage';
 import BlockPage from './BlockPage';
 import UnblockPage from './UnblockPage';
 import StatsPage from './StatsPage';
@@ -13,7 +13,7 @@ const FullPage = () => {
       render={() => {
         return (
           <ReactFullpage.Wrapper>
-            <HomePage />
+            <MainPage />
             <BlockPage />
             <UnblockPage />
             <StatsPage />
