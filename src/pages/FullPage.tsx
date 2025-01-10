@@ -4,7 +4,7 @@ import BlockPage from './BlockPage';
 import UnblockPage from './UnblockPage';
 import StatsPage from './StatsPage';
 
-const MainPage = () => {
+const FullPage = () => {
   return (
     <ReactFullpage
       credits={{ enabled: false }}
@@ -24,4 +24,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default FullPage;
