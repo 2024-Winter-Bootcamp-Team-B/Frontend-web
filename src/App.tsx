@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import './App.css';
-import MainPage from './pages/MainPage';
+import FullPage from './pages/FullPage';
 
 function App() {
   return (
     <>
-      <MainPage />
+      <FullPage />
     </>
   );
 }
