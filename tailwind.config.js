@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         cinzel: ['Cinzel', 'serif'],
       },
+      colors: {
+        'focus-color': '#242320',
+      },
     },
   },
   plugins: [],
