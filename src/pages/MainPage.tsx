@@ -6,7 +6,7 @@ const MainPage = () => {
       <Navbar></Navbar>
       <div className='flex flex-col gap-7 justify-center w-2/5 h-[calc(100%-2.75rem)]'>
         <p
-          className='font-cinzel font-bold text-8xl self-center'
+          className='font-cinzel font-bold text-8xl self-center text-focus-color'
           style={{
             textShadow: '15px 0.4px 9px rgba(0, 0, 0, 0.25)',
           }}
