@@ -4,6 +4,7 @@ import ExplainPage from './ExplainPage';
 import BlockPage from './BlockPage';
 import UnblockPage from './UnblockPage';
 import StatsPage from './StatsPage';
+import BlockedURLPage from './BlockedURLPage';
 
 const FullPage = () => {
   return (
@@ -15,6 +16,7 @@ const FullPage = () => {
       render={() => {
         return (
           <ReactFullpage.Wrapper>
+            <BlockedURLPage />
             <MainPage />
             <ExplainPage />
             <BlockPage />

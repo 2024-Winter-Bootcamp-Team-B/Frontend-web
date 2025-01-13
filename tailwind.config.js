@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         cinzel: ['Cinzel', 'serif'],
+        abril: ['Abril Fatface', 'serif'],
       },
       colors: {
         'focus-color': '#242320',
