@@ -24,7 +24,13 @@ const BlockPage = () => {
               '-2px -2px 4px 0px rgba(239, 237, 225, 0.50) inset, 2px 2px 4px 0px rgba(170, 170, 204, 0.25) inset, 5px 5px 10px 0px rgba(170, 170, 204, 0.50) inset, -5px -5px 10px 0px #FFF inset',
           }}
         ></input>
-        <button className='bg-white rounded-3xl w-24 h-12 self-center mt-auto'>
+        <button
+          className='bg-white rounded-3xl w-24 h-12 self-center mt-auto'
+          style={{
+            boxShadow:
+              '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
+          }}
+        >
           차단하기
         </button>
       </div>
