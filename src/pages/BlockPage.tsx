@@ -1,11 +1,13 @@
 import Navbar from '../components/Navbar';
+import dayjs from 'dayjs';
 
 const BlockPage = () => {
+  const today = dayjs().format('YYYY년 MM월 DD일'); // dayjs 라이브러리로 오늘 날짜 가져오기
   return (
     <div className='section h-full'>
       <Navbar></Navbar>
       <div className='flex flex-col items-start h-[calc(100%-2.75rem)] px-16 py-8 gap-6'>
-        <p className='text-xl'>2025년 01월 13일</p>
+        <p className='text-xl'>{today}</p>
         <div className='font-abril text-8xl flex justify-between w-full'>
           <p>01:30</p>
           <p>~</p>
