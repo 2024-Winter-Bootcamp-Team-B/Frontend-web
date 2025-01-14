@@ -1,7 +1,9 @@
+import Navbar from '../components/Navbar';
+
 const StatsPage = () => {
   return (
-    <div className='section'>
-      <div>StatsPage</div>
+    <div className='section h-full'>
+      <Navbar />
     </div>
   );
 };
