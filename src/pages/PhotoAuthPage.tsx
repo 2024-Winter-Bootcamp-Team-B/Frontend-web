@@ -1,13 +1,16 @@
+import Logo from '../components/Logo';
+
 const PhotoAuthPage = () => {
   return (
     <div className='w-full flex flex-col items-center px-16 py-8'>
+      <Logo />
       <p>예시 사진대로 사진을 찍어 업로드하세요</p>
       <div className='flex gap-3'>
         <div className='w-[300px] h-[400px] bg-[#D1D5DB] rounded-md'></div>
         <form action=''>
           <label
             htmlFor='image'
-            className='flex w-[300px] h-[400px] bg-[#D1D5DB] rounded-md'
+            className='flex w-[300px] h-[400px] bg-[#D1D5DB] rounded-md cursor-pointer'
           ></label>
           <input id='image' type='file' accept='image/*' className='hidden' />
           <input
