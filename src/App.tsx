@@ -5,6 +5,7 @@ import PhotoAuthPage from './pages/PhotoAuthPage';
 import AuthFailPage from './pages/AuthFailPage';
 import MemePage from './pages/MemePage';
 import Dragpage from './pages/DragPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/fail' element={<AuthFailPage />} />
         <Route path='/meme' element={<MemePage />} />
         <Route path='/drag' element={<Dragpage />} />
+        <Route path='/login' element={<LoginPage />} />
       </Routes>
     </>
   );
