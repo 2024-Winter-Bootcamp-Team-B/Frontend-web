@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
-import { LoginReq, fetchLogin } from '../api/login';
+import { fetchSignUp, SignUpReq } from '../api/signUp';
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const login: LoginReq = { login_id: id, login_password: password };
-    fetchLogin(login)
+    const signUp: SignUpReq = {
+      login_id: id,
+      login_password: password,
+      name,
+      email,
+    };
+    fetchSignUp(signUp)
       .then((response) => {
         if (response) {
           console.log(response);
@@ -25,6 +32,14 @@ const LoginPage = () => {
     setPassword(e.target.value);
   };
 
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -37,10 +52,14 @@ const LoginPage = () => {
           value={password}
           onChange={handlePasswordChange}
         />
-        <button>로그인</button>
+        <label htmlFor='name'>이름</label>
+        <input id='name' value={name} onChange={handleNameChange} />
+        <label htmlFor='id'>이메일</label>
+        <input id='email' value={email} onChange={handleEmailChange} />
+        <button>회원가입</button>
       </form>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
