@@ -6,6 +6,7 @@ import AuthFailPage from './pages/AuthFailPage';
 import MemePage from './pages/MemePage';
 import Dragpage from './pages/DragPage';
 import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/meme' element={<MemePage />} />
         <Route path='/drag' element={<Dragpage />} />
         <Route path='/login' element={<LoginPage />} />
+        <Route path='/signup' element={<SignUpPage />} />
       </Routes>
     </>
   );

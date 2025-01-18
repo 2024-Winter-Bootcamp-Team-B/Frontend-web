@@ -14,7 +14,7 @@ export interface SignUpRes {
 export const fetchSignUp = async (req: SignUpReq) => {
   const { login_id, login_password, name, email } = req;
   try {
-    const response = await api.post<SignUpRes>(`/user/sign-up`, {
+    const response = await api.post<SignUpRes>('/user/sign-up', {
       login_id,
       login_password,
       name,
@@ -22,6 +22,6 @@ export const fetchSignUp = async (req: SignUpReq) => {
     });
     return response.data;
   } catch (error) {
-    console.error();
+    Promise.reject(error);
   }
 };
