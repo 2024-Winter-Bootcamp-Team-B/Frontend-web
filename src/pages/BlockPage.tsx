@@ -1,8 +1,22 @@
+import { useEffect } from 'react';
+import { fetchMostBlocked } from '../api/mostBlocked';
 import Navbar from '../components/Navbar';
 import dayjs from 'dayjs';
 
 const BlockPage = () => {
   const today = dayjs().format('YYYY년 MM월 DD일'); // dayjs 라이브러리로 오늘 날짜 가져오기
+
+  // 최고 빈도 사이트 5개 API
+  useEffect(() => {
+    fetchMostBlocked()
+      .then((response) => {
+        if (response) {
+          console.log(response);
+        }
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <div className='section h-full'>
       <Navbar></Navbar>
