@@ -7,7 +7,7 @@ export interface LoginReq {
 
 export interface LoginRes {
   message: string;
-  user_id?: string;
+  user_id?: number;
   user_login_id?: string;
   user_name?: string;
   user_email?: string;
