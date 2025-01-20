@@ -1,7 +1,22 @@
 import Navbar from '../components/Navbar';
 import jail from '../assets/jail.svg';
+import { checkReq, checkBlock } from '../api/checkBlock';
 
 const UnblockPage = () => {
+  // 차단한 사이트 확인 API
+
+  const check: checkReq = {
+    user_id: 1,
+  };
+
+  checkBlock(check)
+    .then((response) => {
+      if (response) {
+        console.log(response);
+      }
+    })
+    .catch((error) => console.error(error));
+
   return (
     <div className='section h-full'>
       <Navbar />
