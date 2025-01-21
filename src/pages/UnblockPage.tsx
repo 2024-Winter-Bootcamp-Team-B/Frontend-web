@@ -2,30 +2,37 @@ import Navbar from '../components/Navbar';
 import jail from '../assets/jail.svg';
 import { checkReq, checkBlock } from '../api/checkBlock';
 import { UnblockReq, unblockSites } from '../api/unblock';
+import { useEffect } from 'react';
 
 const UnblockPage = () => {
-  
   //차단 해제하기 API
-  const unblock: UnblockReq = {
-    result: 1,
-  };
-
-  unblockSites(unblock)
+  useEffect(() => {
+    const unblock: UnblockReq = {
+      user_id: 1,
+      result: 1,
+    };
+    unblockSites(unblock)
+      .then((response) => {
+        if (response) {
+          console.log(response);
+        }
+      })
+      .catch((error) => console.error(error));
+  });
 
   // 차단한 사이트 확인 API
-
-  const check: checkReq = {
-    user_id: 1,
-  };
-
-  checkBlock(check)
-
-    .then((response) => {
-      if (response) {
-        console.log(response);
-      }
-    })
-    .catch((error) => console.error(error));
+  useEffect(() => {
+    const check: checkReq = {
+      user_id: 1,
+    };
+    checkBlock(check)
+      .then((response) => {
+        if (response) {
+          console.log(response);
+        }
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <div className='section h-full'>
