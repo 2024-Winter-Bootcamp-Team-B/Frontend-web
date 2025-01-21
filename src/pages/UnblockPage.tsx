@@ -1,8 +1,17 @@
 import Navbar from '../components/Navbar';
 import jail from '../assets/jail.svg';
 import { checkReq, checkBlock } from '../api/checkBlock';
+import { UnblockReq, unblockSites } from '../api/unblock';
 
 const UnblockPage = () => {
+  
+  //차단 해제하기 API
+  const unblock: UnblockReq = {
+    result: 1,
+  };
+
+  unblockSites(unblock)
+
   // 차단한 사이트 확인 API
 
   const check: checkReq = {
@@ -10,6 +19,7 @@ const UnblockPage = () => {
   };
 
   checkBlock(check)
+
     .then((response) => {
       if (response) {
         console.log(response);
