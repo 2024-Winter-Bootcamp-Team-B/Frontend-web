@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { LoginReq, fetchLogin } from '../api/login';
+import useAuthStore from '../store/authStore';
 
 const LoginPage = () => {
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { login } = useAuthStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const login: LoginReq = { login_id: id, login_password: password };
-    fetchLogin(login)
+    const loginReq: LoginReq = { login_id: id, login_password: password };
+    fetchLogin(loginReq)
       .then((response) => {
         if (response) {
           console.log(response);
+          if (response.user_id && response.user_name) {
+            login(response.user_id, response.user_name);
+          }
         }
       })
       .catch((error) => console.error(error));
