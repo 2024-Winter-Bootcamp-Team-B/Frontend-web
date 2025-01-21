@@ -1,7 +1,22 @@
 import Navbar from '../components/Navbar';
 import jail from '../assets/jail.svg';
+import { UnblockReq, unblockSites } from '../api/unblock';
 
 const UnblockPage = () => {
+  
+  //차단 해제하기 API
+  const unblock: UnblockReq = {
+    result: 1,
+  };
+
+  unblockSites(unblock)
+    .then((response) => {
+      if (response) {
+        console.log(response);
+      }
+    })
+    .catch((error) => console.error(error));
+
   return (
     <div className='section h-full'>
       <Navbar />
