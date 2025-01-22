@@ -3,8 +3,11 @@ import jail from '../assets/jail.svg';
 import { checkReq, checkBlock } from '../api/checkBlock';
 import { UnblockReq, unblockSites } from '../api/unblock';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UnblockPage = () => {
+  const navigate = useNavigate();
+
   //차단 해제하기 API
   useEffect(() => {
     const unblock: UnblockReq = {
@@ -40,6 +43,7 @@ const UnblockPage = () => {
       <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6'>
         <div className='bg-white w-[800px] h-12 rounded-3xl' />
         <button
+          onClick={() => navigate('/photo')}
           className='bg-white rounded-3xl w-24 h-12'
           style={{
             boxShadow:
