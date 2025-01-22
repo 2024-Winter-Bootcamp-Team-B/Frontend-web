@@ -140,7 +140,12 @@ const BlockPage = () => {
         <div>
           <ul className='flex gap-4'>
             {urlList.map((url, index) => (
-              <li key={index}>{url}</li>
+              <li key={index} className='flex items-center gap-4'>
+                <img
+                  src={`https://www.google.com/s2/favicons?sz=32&domain_url=${url}`}
+                />
+                <p>{url}</p>
+              </li>
             ))}
           </ul>
         </div>
