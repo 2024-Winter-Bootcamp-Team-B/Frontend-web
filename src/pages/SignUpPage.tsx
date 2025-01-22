@@ -4,10 +4,9 @@ import { fetchSignUp, SignUpReq } from '../api/signUp';
 const SignUpPage = () => {
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [repassword, setRepassword] = useState<string>('');
-  const [errorMessage, setErrorMessage] = useState('');
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [repassword, setRepassword] = useState<string>('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,6 +14,7 @@ const SignUpPage = () => {
     // 비밀번호 검사
     if (password !== repassword) {
       alert('Passwords do not match.');
+      return;
     }
 
     const signUp: SignUpReq = {
@@ -150,10 +150,9 @@ const SignUpPage = () => {
             re-enter your password
           </label>
         </div>
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         <button
           onClick={handleSubmit}
-          className='bg-white font-bold rounded-3xl w-[400px] h-12 self-center mt-auto'
+          className='bg-white font-bold rounded-3xl w-56 h-12 self-center'
           style={{
             boxShadow:
               '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',

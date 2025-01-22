@@ -47,7 +47,7 @@ const LoginPage = () => {
               onChange={handleIdChange}
             />
             <label
-              htmlFor='password'
+              htmlFor='id'
               className='absolute left-0 text-xs text-black -top-3 transition-all 
             peer-focus:text-xs peer-focus:text-black peer-focus:-top-3
             peer-placeholder-shown:text-2xl peer-placeholder-shown:font-light peer-placeholder-shown:text-white'
@@ -76,7 +76,7 @@ const LoginPage = () => {
           </div>
           <button
             onClick={handleSubmit}
-            className='bg-white rounded-3xl w-56 h-12 self-center'
+            className='bg-white font-bold rounded-3xl w-56 h-12 self-center'
             style={{
               boxShadow:
                 '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
