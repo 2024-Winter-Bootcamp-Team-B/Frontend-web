@@ -37,23 +37,43 @@ const LoginPage = () => {
       </div>
       <div className='flex flex-col items-center justify-center mt-[150px]'>
         <div className='flex flex-col justify-center items-center gap-[35px]'>
-          <input
-            className='bg-transparent placeholder-white placeholder:text-2xl placeholder:font-light focus:outline-none'
-            placeholder='user id'
-            style={{ borderBottom: '2px solid white', width: '500px' }}
-            id='id'
-            value={id}
-            onChange={handleIdChange}
-          />
-          <input
-            className='bg-transparent placeholder-white placeholder:text-2xl placeholder:font-light focus:outline-none'
-            id='password'
-            type='password'
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder='password'
-            style={{ borderBottom: '2px solid white', width: '500px' }}
-          />
+          <div className='relative'>
+            <input
+              className='bg-transparent py-1 text-white font-light text-2xl focus:outline-none peer'
+              placeholder=''
+              style={{ borderBottom: '2px solid white', width: '500px' }}
+              id='id'
+              value={id}
+              onChange={handleIdChange}
+            />
+            <label
+              htmlFor='password'
+              className='absolute left-0 text-xs text-black -top-3 transition-all 
+            peer-focus:text-xs peer-focus:text-black peer-focus:-top-3
+            peer-placeholder-shown:text-2xl peer-placeholder-shown:font-light peer-placeholder-shown:text-white'
+            >
+              user id
+            </label>
+          </div>
+          <div className='relative'>
+            <input
+              className='bg-transparent py-1 text-white font-light text-2xl focus:outline-none peer'
+              id='password'
+              type='password'
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder=''
+              style={{ borderBottom: '2px solid white', width: '500px' }}
+            />
+            <label
+              htmlFor='password'
+              className='absolute left-0 text-xs text-black -top-3 transition-all 
+              peer-focus:text-xs peer-focus:text-black peer-focus:-top-3
+              peer-placeholder-shown:text-2xl peer-placeholder-shown:font-light peer-placeholder-shown:text-white'
+            >
+              password
+            </label>
+          </div>
           <button
             onClick={handleSubmit}
             className='bg-white rounded-3xl w-56 h-12 self-center'
