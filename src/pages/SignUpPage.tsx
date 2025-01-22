@@ -81,8 +81,8 @@ const SignUpPage = () => {
             />
             <label
               htmlFor='name'
-              className='absolute left-0 text-xs text-blue-300 -top-3 transition-all 
-              peer-focus:text-xs peer-focus:text-blue-300 peer-focus:-top-3
+              className='absolute left-0 text-xs text-black -top-3 transition-all 
+              peer-focus:text-xs peer-focus:text-black peer-focus:-top-3
               peer-placeholder-shown:text-2xl peer-placeholder-shown:font-light peer-placeholder-shown:text-white'
             >
               name
@@ -99,8 +99,8 @@ const SignUpPage = () => {
             />
             <label
               htmlFor='id'
-              className='absolute left-0 text-xs text-blue-300 -top-3 transition-all
-              peer-focus:text-xs peer-focus:text-blue-300 peer-focus:-top-3
+              className='absolute left-0 text-xs text-black -top-3 transition-all
+              peer-focus:text-xs peer-focus:text-black peer-focus:-top-3
               peer-placeholder-shown:text-2xl peer-placeholder-shown:font-light peer-placeholder-shown:text-white'
             >
               email
@@ -117,8 +117,8 @@ const SignUpPage = () => {
             />
             <label
               htmlFor='id'
-              className='absolute left-0 text-xs text-blue-300 -top-3 transition-all
-              peer-focus:text-xs peer-focus:text-blue-300 peer-focus:-top-3
+              className='absolute left-0 text-xs text-black -top-3 transition-all
+              peer-focus:text-xs peer-focus:text-black peer-focus:-top-3
               peer-placeholder-shown:text-2xl peer-placeholder-shown:font-light peer-placeholder-shown:text-white'
             >
               user id
@@ -136,8 +136,8 @@ const SignUpPage = () => {
             />
             <label
               htmlFor='password'
-              className='absolute left-0 text-xs text-blue-300 -top-3 transition-all
-              peer-focus:text-xs peer-focus:text-blue-300 peer-focus:-top-3
+              className='absolute left-0 text-xs text-black -top-3 transition-all
+              peer-focus:text-xs peer-focus:text-black peer-focus:-top-3
               peer-placeholder-shown:text-2xl peer-placeholder-shown:font-light peer-placeholder-shown:text-white'
             >
               password
@@ -155,8 +155,8 @@ const SignUpPage = () => {
             />
             <label
               htmlFor='password'
-              className='absolute left-0 text-xs text-blue-300 -top-3 transition-all
-              peer-focus:text-xs peer-focus:text-blue-300 peer-focus:-top-3
+              className='absolute left-0 text-xs text-black -top-3 transition-all
+              peer-focus:text-xs peer-focus:text-black peer-focus:-top-3
               peer-placeholder-shown:text-2xl peer-placeholder-shown:font-light peer-placeholder-shown:text-white'
             >
               re-enter your password
