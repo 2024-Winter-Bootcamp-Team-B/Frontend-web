@@ -25,7 +25,7 @@ ChartJS.register(
   Legend,
 );
 
-const StatsPage = () => {
+const StatsPage = ({ fullpageApi }: { fullpageApi: any }) => {
   const { user_id } = useAuthStore();
 
   const data = {
@@ -105,7 +105,7 @@ const StatsPage = () => {
 
   return (
     <div className='section h-full'>
-      <Navbar />
+      <Navbar fullpageApi={fullpageApi} />
       <div className='h-[calc(100%-2.75rem)]'>
         <Bar data={data} options={options} className='h-screen' />
       </div>
