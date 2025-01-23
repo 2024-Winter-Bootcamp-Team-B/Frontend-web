@@ -4,14 +4,19 @@ import { checkReq, checkBlock } from '../api/checkBlock';
 import { UnblockReq, unblockSites } from '../api/unblock';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../store/authStore';
 
 const UnblockPage = ({ fullpageApi }: { fullpageApi: any }) => {
   const navigate = useNavigate();
+  const { user_id } = useAuthStore();
 
   //차단 해제하기 API
   useEffect(() => {
+    if (!user_id) {
+      return;
+    }
     const unblock: UnblockReq = {
-      user_id: 1,
+      user_id,
       result: 1,
     };
     unblockSites(unblock)
@@ -25,8 +30,11 @@ const UnblockPage = ({ fullpageApi }: { fullpageApi: any }) => {
 
   // 차단한 사이트 확인 API
   useEffect(() => {
+    if (!user_id) {
+      return;
+    }
     const check: checkReq = {
-      user_id: 1,
+      user_id,
     };
     checkBlock(check)
       .then((response) => {
