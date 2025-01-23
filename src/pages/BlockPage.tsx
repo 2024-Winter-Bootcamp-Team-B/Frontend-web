@@ -9,7 +9,7 @@ import useAuthStore from '../store/authStore';
 
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
 
-const BlockPage = () => {
+const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
   const [startTime, setStartTime] = useState<string>('00:00');
   const [goalTime, setGoalTime] = useState<string>('00:00');
   const [timeDiff, setTimeDiff] = useState<string>('');
@@ -91,7 +91,7 @@ const BlockPage = () => {
 
   return (
     <div className='section h-full'>
-      <Navbar></Navbar>
+      <Navbar fullpageApi={fullpageApi}></Navbar>
       <div className='flex flex-col items-start h-[calc(100%-2.75rem)] px-16 py-8 gap-6'>
         {/* 오늘 날짜 표시 */}
         <p className='text-xl'>{today}</p>
