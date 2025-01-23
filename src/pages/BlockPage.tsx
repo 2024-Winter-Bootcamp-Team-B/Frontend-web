@@ -102,6 +102,9 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
             disableClock={true}
             clearIcon={null}
             format='HH:mm'
+            className='w-[300px]'
+            hourPlaceholder='00'
+            minutePlaceholder='00'
           />
           <p>~</p>
           <TimePicker
@@ -110,6 +113,9 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
             disableClock={true}
             clearIcon={null}
             format='HH:mm'
+            className='w-[300px]'
+            hourPlaceholder='00'
+            minutePlaceholder='00'
           />
           <p>{timeDiff}</p>
         </div>
