@@ -91,7 +91,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
 
   return (
     <div className='section h-full'>
-      <Navbar fullpageApi={fullpageApi}></Navbar>
+      <Navbar fullpageApi={fullpageApi} />
       <div className='flex flex-col items-start h-[calc(100%-2.75rem)] px-16 py-8 gap-6'>
         {/* 오늘 날짜 표시 */}
         <p className='text-xl'>{today}</p>

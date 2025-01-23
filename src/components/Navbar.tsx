@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 
 const Navbar = ({ fullpageApi }: { fullpageApi: any }) => {
-  // const navItems = ['BLOCK', 'UNBLOCK', 'HISTORY'];
   const navItems = [
     { label: 'BLOCK', anchor: 'block' },
     { label: 'UNBLOCK', anchor: 'unblock' },
@@ -18,7 +17,7 @@ const Navbar = ({ fullpageApi }: { fullpageApi: any }) => {
           <li
             key={item.label}
             onClick={() => fullpageApi.moveTo(item.anchor)} // fullpageApi를 통해 섹션 이동
-            className="cursor-pointer hover:underline" // 마우스 커서 스타일 및 호버 효과 추가
+            className='cursor-pointer'
           >
             {item.label}
           </li>
@@ -27,12 +26,7 @@ const Navbar = ({ fullpageApi }: { fullpageApi: any }) => {
           {isLoggedIn ? (
             `WELCOME, ${user_name}`
           ) : (
-            <button 
-              onClick={() => navigate('/login')} // 얘는 navigate로 이동하도록 함
-              className="hover:underline"
-            >
-              LOGIN
-            </button>
+            <button onClick={() => navigate('/login')}>LOGIN</button>
           )}
         </li>
       </ul>
