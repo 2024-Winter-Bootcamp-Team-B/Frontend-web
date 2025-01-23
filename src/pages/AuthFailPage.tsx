@@ -1,31 +1,37 @@
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import authFail from '../assets/authFail.svg';
-import './AuthFailPage.css';
+import jail from '../assets/authFailJail.svg';
+import person from '../assets/person.svg';
+import { motion } from 'motion/react';
 
 const AuthFailPage = () => {
   const navigate = useNavigate();
-  const [animate, setAnimate] = useState(false);
 
-  useEffect(() => {
-    // 컴포넌트가 마운트되면 애니메이션 시작
-    setAnimate(true);
-  }, []);
+  // 애니메이션 variants 설정
+  const variants = {
+    hidden: {
+      y: '-100%',
+    },
+    visible: {
+      y: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
 
   return (
-    <div className='w-full flex flex-col items-center justify-between py-8'>
-       {/* 감옥 애니메이션 */}
-      <div
-        className={`${
-          animate ? 'jail-animation' : ''
-        } w-full h-4/5 flex justify-center`}
-      >
-        <img src={authFail} alt="감옥" className='h-4/5 w-full' />
+    <div className='w-full flex flex-col items-center justify-between pb-8'>
+      <div className='w-full h-4/5 flex justify-center relative'>
+        <motion.img
+          src={jail}
+          className='h-full absolute z-10'
+          variants={variants}
+          initial='hidden'
+          animate='visible'
+        />
+        <img src={person} className='h-3/5 absolute bottom-5' />
       </div>
-      {/* 텍스트 */} 
       <p className='font-abril text-5xl'>Try Again</p>
-
-      {/* 재인증 버튼 */}
       <button
         onClick={() => navigate('/photo')}
         className='bg-white rounded-3xl w-24 h-12'
