@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar';
 
 const ExplainPage = ({ fullpageApi }: { fullpageApi: any }) => {
   return (
-    <div className='section h-full bg-[url("/src/assets/sandglassBackground.png")] bg-center bg-cover'>
+    <div className='section h-full'>
       <Navbar fullpageApi={fullpageApi} />
       <div className='flex flex-col justify-center items-center w-1/2 h-[calc(100%-2.75rem)] text-xl font-light'>
         <p>원하는 URL을 입력하고 차단 시간을 설정하세요.</p>
