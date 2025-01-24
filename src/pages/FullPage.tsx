@@ -46,7 +46,7 @@ const FullPage: React.FC<FullPageProps> = () => {
           style={{
             backgroundImage: "url('/src/assets/hourglass.svg')",
             opacity: opacity,
-            transition: 'opacity 1s ease-in-out',
+            transition: 'opacity 0.5s ease-in-out',
           }}
         ></div>
       )}
