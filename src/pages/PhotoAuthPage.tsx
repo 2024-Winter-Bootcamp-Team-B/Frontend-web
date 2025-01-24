@@ -52,16 +52,38 @@ const PhotoAuthPage = () => {
     };
 
     fetchUploadImg(uploadImage)
-      .then((response) => {
-        if (response?.task_id) {
-          // 성공 시 밈 페이지 보여주기
-          navigate('/meme');
-        } else {
-          // 실패 시 alert
-          alert('인증 실패');
-        }
-      })
-      .catch((error) => console.error(error));
+    .then((response) => {
+      const taskId = response?.task_id;
+  
+      if (taskId) {
+        const interval = setInterval(() => {
+          fetch(`http://localhost:8000/task/${taskId}/status`)
+            .then((res) => res.json())
+            .then((taskStatus) => {
+              if (taskStatus.status === 'SUCCESS') {
+                clearInterval(interval); // 상태 확인 중지
+                if (taskStatus.result?.match) {
+                  navigate('/meme'); // 성공 처리
+                } else {
+                  alert(taskStatus.result?.message || '인증 실패');
+                }
+              } else if (taskStatus.status === 'FAILURE') {
+                clearInterval(interval); // 상태 확인 중지
+                alert('작업 실패');
+              }
+            })
+            .catch((err) => {
+              clearInterval(interval);
+              console.error(err);
+              alert('작업 상태를 확인하는 중 오류가 발생했습니다.');
+            });
+        }, 1000); // 1초 간격으로 상태 확인
+      } else {
+        alert('작업 생성 실패');
+      }
+    })
+    .catch((error) => console.error(error));
+  
   };
 
   return (
