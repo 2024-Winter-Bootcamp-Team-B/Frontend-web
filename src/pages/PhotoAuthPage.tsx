@@ -4,6 +4,7 @@ import { fetchUploadImg, UploadImgReq } from '../api/uploadImage';
 import useAuthStore from '../store/authStore';
 import photoButton from '../assets/photoButton.svg';
 import { useNavigate } from 'react-router-dom';
+import { fetchTaskId, TaskIdReq } from '../api/taskId';
 
 const PhotoAuthPage = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -52,38 +53,39 @@ const PhotoAuthPage = () => {
     };
 
     fetchUploadImg(uploadImage)
-    .then((response) => {
-      const taskId = response?.task_id;
-  
-      if (taskId) {
-        const interval = setInterval(() => {
-          fetch(`http://localhost:8000/task/${taskId}/status`)
-            .then((res) => res.json())
-            .then((taskStatus) => {
-              if (taskStatus.status === 'SUCCESS') {
-                clearInterval(interval); // 상태 확인 중지
-                if (taskStatus.result?.match) {
-                  navigate('/meme'); // 성공 처리
-                } else {
-                  alert(taskStatus.result?.message || '인증 실패');
+      .then((response) => {
+        const task_id = response?.task_id;
+
+        if (task_id) {
+          const interval = setInterval(() => {
+            const taskId: TaskIdReq = {
+              task_id,
+            };
+            fetchTaskId(taskId)
+              .then((response) => {
+                if (response?.status === 'SUCCESS') {
+                  clearInterval(interval); // 상태 확인 중지
+                  if (response?.result?.match) {
+                    navigate('/meme'); // 성공 처리
+                  } else {
+                    alert(response?.result?.message || '인증 실패');
+                  }
+                } else if (response?.status === 'FAILURE') {
+                  clearInterval(interval); // 상태 확인 중지
+                  alert('작업 실패');
                 }
-              } else if (taskStatus.status === 'FAILURE') {
-                clearInterval(interval); // 상태 확인 중지
-                alert('작업 실패');
-              }
-            })
-            .catch((err) => {
-              clearInterval(interval);
-              console.error(err);
-              alert('작업 상태를 확인하는 중 오류가 발생했습니다.');
-            });
-        }, 1000); // 1초 간격으로 상태 확인
-      } else {
-        alert('작업 생성 실패');
-      }
-    })
-    .catch((error) => console.error(error));
-  
+              })
+              .catch((error) => {
+                clearInterval(interval);
+                console.error(error);
+                alert('작업 상태를 확인하는 중 오류가 발생했습니다.');
+              });
+          }, 1000); // 1초 간격으로 상태 확인
+        } else {
+          alert('작업 생성 실패');
+        }
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
