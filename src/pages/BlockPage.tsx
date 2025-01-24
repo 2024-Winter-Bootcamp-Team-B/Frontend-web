@@ -15,6 +15,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
   const [timeDiff, setTimeDiff] = useState<string>('');
   const [urlInput, setUrlInput] = useState<string>('');
   const [urlList, setUrlList] = useState<string[]>([]);
+  const [mostBlocked, setMostBlocked] = useState<string[]>([]);
   const today = dayjs().format('YYYY년 MM월 DD일'); // dayjs 라이브러리로 오늘 날짜 가져오기
   const { user_id } = useAuthStore();
 
@@ -22,8 +23,8 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
   useEffect(() => {
     fetchMostBlocked()
       .then((response) => {
-        if (response) {
-          console.log(response);
+        if (response?.result && Array.isArray(response.result)) {
+          setMostBlocked(response.result);
         }
       })
       .catch((error) => console.error(error));
@@ -92,79 +93,89 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
   return (
     <div className='section h-full'>
       <Navbar fullpageApi={fullpageApi} />
-      <div className='flex flex-col items-start h-[calc(100%-2.75rem)] px-16 py-8 gap-6'>
-        {/* 오늘 날짜 표시 */}
-        <p className='text-xl'>{today}</p>
-        <div className='font-abril text-8xl flex justify-between w-full'>
-          <TimePicker
-            onChange={handleStartTimeChange}
-            value={startTime}
-            disableClock={true}
-            clearIcon={null}
-            format='HH:mm'
-            className='w-[300px]'
-            hourPlaceholder='00'
-            minutePlaceholder='00'
-          />
-          <p>~</p>
-          <TimePicker
-            onChange={handleGoalTimeChange}
-            value={goalTime}
-            disableClock={true}
-            clearIcon={null}
-            format='HH:mm'
-            className='w-[300px]'
-            hourPlaceholder='00'
-            minutePlaceholder='00'
-          />
-          <p>{timeDiff}</p>
+      <div className='flex h-[calc(100%-2.75rem)]'>
+        <div className='flex flex-col justify-center gap-12 bg-[#F2F6F5] p-4 self-center rounded-[30px]'>
+          {mostBlocked.map((site, index) => (
+            <img
+              key={index}
+              src={`https://www.google.com/s2/favicons?sz=32&domain_url=${site}`}
+            />
+          ))}
         </div>
-        <p className='text-xl'>URL을 입력하세요</p>
-        <div className='flex gap-4'>
-          <input
-            type='url'
-            value={urlInput}
-            onChange={handleUrlChange}
-            placeholder='URL 예시'
-            className='rounded-[30px] w-[1000px] h-12 p-6 placeholder:text-center'
-            style={{
-              boxShadow:
-                '-2px -2px 4px 0px rgba(239, 237, 225, 0.50) inset, 2px 2px 4px 0px rgba(170, 170, 204, 0.25) inset, 5px 5px 10px 0px rgba(170, 170, 204, 0.50) inset, -5px -5px 10px 0px #FFF inset',
-            }}
-          />
+        <div className='flex flex-col items-start h-full w-full px-16 py-8 gap-6'>
+          {/* 오늘 날짜 표시 */}
+          <p className='text-xl'>{today}</p>
+          <div className='font-abril text-8xl flex justify-between w-full'>
+            <TimePicker
+              onChange={handleStartTimeChange}
+              value={startTime}
+              disableClock={true}
+              clearIcon={null}
+              format='HH:mm'
+              className='w-[300px]'
+              hourPlaceholder='00'
+              minutePlaceholder='00'
+            />
+            <p>~</p>
+            <TimePicker
+              onChange={handleGoalTimeChange}
+              value={goalTime}
+              disableClock={true}
+              clearIcon={null}
+              format='HH:mm'
+              className='w-[300px]'
+              hourPlaceholder='00'
+              minutePlaceholder='00'
+            />
+            <p>{timeDiff}</p>
+          </div>
+          <p className='text-xl'>URL을 입력하세요</p>
+          <div className='flex gap-4'>
+            <input
+              type='url'
+              value={urlInput}
+              onChange={handleUrlChange}
+              placeholder='URL 예시'
+              className='rounded-[30px] w-[1000px] h-12 p-6 placeholder:text-center'
+              style={{
+                boxShadow:
+                  '-2px -2px 4px 0px rgba(239, 237, 225, 0.50) inset, 2px 2px 4px 0px rgba(170, 170, 204, 0.25) inset, 5px 5px 10px 0px rgba(170, 170, 204, 0.50) inset, -5px -5px 10px 0px #FFF inset',
+              }}
+            />
+            <button
+              onClick={handleAddUrl}
+              className='bg-white rounded-3xl w-24 h-12'
+              style={{
+                boxShadow:
+                  '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
+              }}
+            >
+              추가
+            </button>
+          </div>
+          <div>
+            <ul className='flex gap-4'>
+              {urlList.map((url, index) => (
+                <li key={index} className='flex items-center gap-4'>
+                  <img
+                    src={`https://www.google.com/s2/favicons?sz=32&domain_url=${url}`}
+                  />
+                  <p>{url}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
           <button
-            onClick={handleAddUrl}
-            className='bg-white rounded-3xl w-24 h-12'
+            className='bg-white rounded-3xl w-24 h-12 self-center mt-auto'
+            onClick={handleBlock}
             style={{
               boxShadow:
                 '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
             }}
           >
-            추가
+            차단하기
           </button>
         </div>
-        <div>
-          <ul className='flex gap-4'>
-            {urlList.map((url, index) => (
-              <li key={index} className='flex items-center gap-4'>
-                <img
-                  src={`https://www.google.com/s2/favicons?sz=32&domain_url=${url}`}
-                />
-                <p>{url}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <button
-          className='bg-white rounded-3xl w-24 h-12 self-center mt-auto'
-          onClick={handleBlock}
-          style={{
-            boxShadow:
-              '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
-          }}
-        >
-          차단하기
-        </button>
       </div>
     </div>
   );
