@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { LoginReq, fetchLogin } from '../api/login';
 import useAuthStore from '../store/authStore';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { login } = useAuthStore();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -86,7 +88,7 @@ const LoginPage = () => {
           </button>
         </div>
         <div className='mt-[20px]'>
-          <button>or Sign up</button>
+          <button onClick={() => navigate('/signup')}>or Sign up</button>
         </div>
       </div>
     </div>
