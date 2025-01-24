@@ -1,12 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import { fetchStat, StatReq } from '../api/stat';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
@@ -19,7 +20,8 @@ import useAuthStore from '../store/authStore';
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
@@ -27,28 +29,33 @@ ChartJS.register(
 
 const StatsPage = ({ fullpageApi }: { fullpageApi: any }) => {
   const { user_id } = useAuthStore();
+  const [labels, setLabels] = useState<string[]>([]); // x축 (date)
+  const [goalData, setGoalData] = useState<number[]>([]); // y축 (goal)
+  const [actualData, setActualData] = useState<number[]>([]); // y축 (actual)
 
   const data = {
-    labels: ['월', '화', '수', '목', '금', '토', '일'],
+    labels,
     datasets: [
       {
         label: '목표 집중 시간',
-        data: [7, 6, 7, 5, 4, 3, 8],
+        data: goalData,
         borderWidth: 2,
-        backgroundColor: 'rgba(255, 205, 86, 0.6)',
+        backgroundColor: 'rgba(255, 205, 86, 0.9)',
         borderColor: 'rgba(255, 205, 86, 1)',
+        fill: true,
       },
       {
         label: '실제 집중 시간',
-        data: [6, 5, 6, 4, 3, 2, 7],
+        data: actualData,
         borderWidth: 2,
-        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        backgroundColor: 'rgba(54, 162, 235, 0.9)',
         borderColor: 'rgba(54, 162, 235, 1)',
+        fill: true,
       },
     ],
   };
 
-  const options: ChartOptions<'bar'> = {
+  const options: ChartOptions<'line'> = {
     responsive: true,
     scales: {
       y: {
@@ -76,8 +83,8 @@ const StatsPage = ({ fullpageApi }: { fullpageApi: any }) => {
         borderColor: '#ccc',
         padding: 10,
         callbacks: {
-          label: (context: TooltipItem<'bar'>) =>
-            `${context.dataset.label}: ${context.raw}시간`,
+          label: (context: TooltipItem<'line'>) =>
+            `${context.dataset.label}: ${context.raw}분`,
         },
       },
     },
@@ -96,8 +103,15 @@ const StatsPage = ({ fullpageApi }: { fullpageApi: any }) => {
     };
     fetchStat(stat)
       .then((response) => {
-        if (response) {
+        if (response && response.result) {
           console.log(response);
+          setLabels(response.result.map((item) => item.date)); // x축 (date)
+          setGoalData(
+            response.result.map((item) => parseInt(item.goal_min)), // y축 (goal)
+          );
+          setActualData(
+            response.result.map((item) => parseInt(item.actual_min)), // y축 (actual)
+          );
         }
       })
       .catch((error) => console.error(error));
@@ -107,7 +121,7 @@ const StatsPage = ({ fullpageApi }: { fullpageApi: any }) => {
     <div className='section h-full'>
       <Navbar fullpageApi={fullpageApi} />
       <div className='h-[calc(100%-2.75rem)]'>
-        <Bar data={data} options={options} className='h-screen' />
+        <Line data={data} options={options} className='h-screen' />
       </div>
     </div>
   );

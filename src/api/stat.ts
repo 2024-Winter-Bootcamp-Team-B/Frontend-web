@@ -6,10 +6,15 @@ export interface StatReq {
 
 export interface StatRes {
   message: string;
-  user_id?: number;
-  start_time?: string;
-  end_time?: string;
-  goal_time?: string;
+  result?: Result[];
+}
+
+interface Result {
+  date: string;
+  goal: string;
+  actual: string;
+  goal_min: string;
+  actual_min: string;
 }
 
 export const fetchStat = async (req: StatReq) => {
