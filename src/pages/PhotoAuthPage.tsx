@@ -36,11 +36,17 @@ const PhotoAuthPage = () => {
     if (!user_id) {
       return;
     }
+
+    // exampleImage에서 handShape 배열 생성
+    const binaryString = exampleImage.split('/').pop()?.split('.')[0]; // "00001"
+    const handShapeArray = binaryString ? binaryString.split('').map(Number) : []; // [0, 0, 0, 0, 1]
+
     const uploadImage: UploadImgReq = {
-      hand_shape: [1, 1, 1, 1, 1],
+      hand_shape: handShapeArray, // handShape 배열 추가
       file: file,
       user_id,
     };
+    
     fetchUploadImg(uploadImage)
       .then((response) => {
         if (response) {
