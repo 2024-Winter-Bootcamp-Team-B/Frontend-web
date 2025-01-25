@@ -144,7 +144,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
             />
             <button
               onClick={handleAddUrl}
-              className='bg-white rounded-3xl w-24 h-12'
+              className='bg-white rounded-3xl w-24 h-12 active:bg-[#E5E5F0]'
               style={{
                 boxShadow:
                   '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
@@ -166,7 +166,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
             </ul>
           </div>
           <button
-            className='bg-white rounded-3xl w-24 h-12 self-center mt-auto'
+            className='bg-white rounded-3xl w-24 h-12 self-center mt-auto active:bg-[#E5E5F0]'
             onClick={handleBlock}
             style={{
               boxShadow:

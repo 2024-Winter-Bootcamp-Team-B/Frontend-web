@@ -78,7 +78,7 @@ const LoginPage = () => {
           </div>
           <button
             onClick={handleSubmit}
-            className='bg-white font-bold rounded-3xl w-56 h-12 self-center'
+            className='bg-white font-bold rounded-3xl w-56 h-12 self-center active:bg-[#E5E5F0]'
             style={{
               boxShadow:
                 '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
