@@ -52,7 +52,7 @@ const UnblockPage = ({ fullpageApi }: { fullpageApi: any }) => {
         <div className='bg-white w-[800px] h-12 rounded-3xl' />
         <button
           onClick={() => navigate('/photo')}
-          className='bg-white rounded-3xl w-24 h-12'
+          className='bg-white rounded-3xl w-24 h-12 active:bg-[#E5E5F0]'
           style={{
             boxShadow:
               '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
