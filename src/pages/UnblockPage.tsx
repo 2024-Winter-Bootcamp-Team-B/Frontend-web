@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar';
+import ProgressBar from '../components/ProgressBar';
 import jail from '../assets/jail.svg';
 import { checkReq, checkBlock } from '../api/checkBlock';
 import { UnblockReq, unblockSites } from '../api/unblock';
@@ -49,7 +50,7 @@ const UnblockPage = ({ fullpageApi }: { fullpageApi: any }) => {
     <div className='section h-full'>
       <Navbar fullpageApi={fullpageApi} />
       <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6'>
-        <div className='bg-white w-[800px] h-12 rounded-3xl' />
+        <ProgressBar />
         <button
           onClick={() => navigate('/photo')}
           className='bg-white rounded-3xl w-24 h-12 active:bg-[#E5E5F0]'
