@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
+import useFullpageStore from '../store/fullpageStore';
 
-const Navbar = ({ fullpageApi }: { fullpageApi: any }) => {
+const Navbar = () => {
+  // Zustand 스토어에서 fullpageApi 가져오기
+  const fullpageApi = useFullpageStore((state) => state.fullpageApi);
+
   const navItems = [
     { label: 'BLOCK', anchor: 'block' },
     { label: 'UNBLOCK', anchor: 'unblock' },
@@ -16,7 +20,7 @@ const Navbar = ({ fullpageApi }: { fullpageApi: any }) => {
         {navItems.map((item) => (
           <li
             key={item.label}
-            onClick={() => fullpageApi.moveTo(item.anchor)} // fullpageApi를 통해 섹션 이동
+            onClick={() => fullpageApi?.moveTo(item.anchor)} // fullpageApi를 통해 섹션 이동, Zustand에서 가져온 fullpageApi 사용
             className=' hover:text-stone-300 cursor-pointer group relative flex items-center overflow-hidden over:underline'
           >
             <span className='absolute left-0 bottom-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300'></span>

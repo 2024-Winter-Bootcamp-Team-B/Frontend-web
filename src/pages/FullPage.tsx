@@ -5,10 +5,13 @@ import ExplainPage from './ExplainPage';
 import BlockPage from './BlockPage';
 import UnblockPage from './UnblockPage';
 import StatsPage from './StatsPage';
+import useFullpageStore from '../store/fullpageStore';
 
 type FullPageProps = {};
 
 const FullPage: React.FC<FullPageProps> = () => {
+  const setFullpageApi = useFullpageStore((state) => state.setFullpageApi);
+
   const [showHourglass, setShowHourglass] = useState<boolean>(true); // hourglass 가시성 상태
   const [opacity, setOpacity] = useState<number>(1); // hourglass 오퍼시티 상태
 
@@ -58,7 +61,8 @@ const FullPage: React.FC<FullPageProps> = () => {
         onLeave={(_, destination) => {
           handlePageChange(destination.index); // 페이지 전환 시 상태 변경
         }}
-        render={() => {
+        render={({ fullpageApi }) => {
+          setFullpageApi(fullpageApi);
           return (
             <ReactFullpage.Wrapper>
               <MainPage />
