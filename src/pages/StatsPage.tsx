@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { fetchStat, StatReq } from '../api/stat';
 import { Line } from 'react-chartjs-2';
 import {
@@ -119,7 +118,7 @@ const StatsPage = () => {
 
   return (
     <div className='section h-full'>
-      <div className='h-[calc(100%-2.75rem)]'>
+      <div className='h-[calc(100%-2.75rem)] mt-11'>
         <Line data={data} options={options} className='h-screen' />
       </div>
     </div>

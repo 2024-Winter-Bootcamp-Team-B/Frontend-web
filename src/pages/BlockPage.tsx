@@ -91,7 +91,7 @@ const BlockPage = () => {
 
   return (
     <div className='section h-full'>
-      <div className='flex h-[calc(100%-2.75rem)]'>
+      <div className='flex h-[calc(100%-2.75rem)] mt-11'>
         <div className='flex flex-col justify-center gap-12 bg-[#F2F6F5] p-4 self-center rounded-[30px]'>
           {mostBlocked.map((site, index) => (
             <img

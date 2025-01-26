@@ -47,7 +47,7 @@ const UnblockPage = () => {
 
   return (
     <div className='section h-full'>
-      <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6'>
+      <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6 mt-11'>
         <ProgressBar />
         <button
           className='bg-white rounded-full self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden '
