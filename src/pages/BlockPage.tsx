@@ -105,7 +105,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
         <div className='flex flex-col items-start h-full w-full px-16 py-8 gap-6'>
           {/* 오늘 날짜 표시 */}
           <p className='text-xl'>{today}</p>
-          <div className='font-abril text-8xl flex justify-between w-full'>
+          <div className='font-abril text-8xl flex justify-between items-center w-full'>
             <TimePicker
               onChange={handleStartTimeChange}
               value={startTime}
@@ -127,7 +127,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
               hourPlaceholder='00'
               minutePlaceholder='00'
             />
-            <p>{timeDiff}</p>
+            <p className='w-[500px]'>{timeDiff}</p>
           </div>
           <p className='text-xl'>URL을 입력하세요</p>
           <div className='flex gap-4'>
