@@ -10,8 +10,10 @@ import useAuthStore from '../store/authStore';
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
 
 const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
-  const [startTime, setStartTime] = useState<string>('00:00');
-  const [goalTime, setGoalTime] = useState<string>('00:00');
+  const [startTime, setStartTime] = useState<string>(dayjs().format('HH:mm'));
+  const [goalTime, setGoalTime] = useState<string>(
+    dayjs().add(1, 'hour').format('HH:mm'),
+  );
   const [timeDiff, setTimeDiff] = useState<string>('');
   const [urlInput, setUrlInput] = useState<string>('');
   const [urlList, setUrlList] = useState<string[]>([]);
@@ -49,11 +51,11 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
   }, [startTime, goalTime]);
 
   const handleStartTimeChange = (value: string | null) => {
-    setStartTime(value || '00:00');
+    setStartTime(value || dayjs().format('HH:mm'));
   };
 
   const handleGoalTimeChange = (value: string | null) => {
-    setGoalTime(value || '00:00');
+    setGoalTime(value || dayjs().add(1, 'hour').format('HH:mm'));
   };
 
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,6 +107,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
         <div className='flex flex-col items-start h-full w-full px-16 py-8 gap-6'>
           {/* 오늘 날짜 표시 */}
           <p className='text-xl'>{today}</p>
+          <p>시간을 입력하세요</p>
           <div className='font-abril text-8xl flex justify-between items-center w-full'>
             <TimePicker
               onChange={handleStartTimeChange}
