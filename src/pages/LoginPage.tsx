@@ -78,17 +78,24 @@ const LoginPage = () => {
           </div>
           <button
             onClick={handleSubmit}
-            className='bg-white font-bold rounded-3xl w-56 h-12 self-center active:bg-[#E5E5F0]'
+            className='bg-white rounded-full self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden '
             style={{
               boxShadow:
                 '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
             }}
           >
-            <p className='font-bold text-2xl'>Log in</p>
+            <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-cyan-600 opacity-100 group-hover:w-full duration-400 ease'></span>
+            <span className='relative font-bold'>Log in</span>
           </button>
         </div>
         <div className='mt-[20px]'>
-          <button onClick={() => navigate('/signup')}>or Sign up</button>
+          <button
+            className=' hover:text-white cursor-pointer group relative flex items-center overflow-hidden over:underline'
+            onClick={() => navigate('/signup')}
+          >
+            <span className='absolute left-0 bottom-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300'></span>
+            <span className='relative'>or Sign Up</span>
+          </button>
         </div>
       </div>
     </div>

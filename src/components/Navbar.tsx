@@ -17,16 +17,23 @@ const Navbar = ({ fullpageApi }: { fullpageApi: any }) => {
           <li
             key={item.label}
             onClick={() => fullpageApi.moveTo(item.anchor)} // fullpageApi를 통해 섹션 이동
-            className='cursor-pointer'
+            className=' hover:text-stone-300 cursor-pointer group relative flex items-center overflow-hidden over:underline'
           >
-            {item.label}
+            <span className='absolute left-0 bottom-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300'></span>
+            <span className='relative'>{item.label}</span>
           </li>
         ))}
         <li className='ml-auto'>
           {isLoggedIn ? (
             `WELCOME, ${user_name}`
           ) : (
-            <button onClick={() => navigate('/login')}>LOGIN</button>
+            <button
+              className=' hover:text-stone-300 cursor-pointer group relative flex items-center overflow-hidden over:underline'
+              onClick={() => navigate('/login')}
+            >
+              <span className='absolute left-0 bottom-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300'></span>
+              <span className='relative'>LOGIN</span>
+            </button>
           )}
         </li>
       </ul>
