@@ -15,7 +15,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className='text-white flex flex-col gap-4 min-h-11 max-h-11'>
+    <nav className='text-white flex flex-col gap-4 min-h-11 max-h-11 fixed w-full py-4 z-50'>
       <ul className='flex gap-32 font-cinzel font-bold mx-16'>
         {navItems.map((item) => (
           <li

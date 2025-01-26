@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import FullPage from './pages/FullPage';
+import Navbar from './components/Navbar'; // Navbar 추가
 import BlockedURLPage from './pages/BlockedURLPage';
 import PhotoAuthPage from './pages/PhotoAuthPage';
 import AuthFailPage from './pages/AuthFailPage';
@@ -11,6 +12,8 @@ import SignUpPage from './pages/SignUpPage';
 function App() {
   return (
     <>
+      {/* Navbar를 최상단에 추가 */}
+      <Navbar />
       <Routes>
         <Route path='/' element={<FullPage />} />
         <Route path='/blockedURL' element={<BlockedURLPage />} />
