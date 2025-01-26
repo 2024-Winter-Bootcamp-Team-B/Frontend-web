@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { fetchMostBlocked } from '../api/mostBlocked';
-import Navbar from '../components/Navbar';
 import dayjs from 'dayjs';
 import { BlockReq, blockSites } from '../api/block';
 import TimePicker from 'react-time-picker';
@@ -9,7 +8,7 @@ import useAuthStore from '../store/authStore';
 
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
 
-const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
+const BlockPage = () => {
   const [startTime, setStartTime] = useState<string>(dayjs().format('HH:mm'));
   const [goalTime, setGoalTime] = useState<string>(
     dayjs().add(1, 'hour').format('HH:mm'),
@@ -94,8 +93,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
 
   return (
     <div className='section h-full'>
-      <Navbar fullpageApi={fullpageApi} />
-      <div className='flex h-[calc(100%-2.75rem)]'>
+      <div className='flex h-[calc(100%-2.75rem)] mt-11'>
         <div className='flex flex-col justify-center gap-12 bg-[#F2F6F5] p-4 self-center rounded-[30px]'>
           {mostBlocked.map((site, index) => (
             <img
@@ -153,7 +151,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
                   '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
               }}
             >
-              <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-cyan-600 opacity-100 group-hover:w-full duration-400 ease'></span>
+              <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-focus-color opacity-100 group-hover:w-full duration-400 ease'></span>
               <span className='relative'>추가</span>
             </button>
           </div>
@@ -177,7 +175,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
                 '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
             }}
           >
-            <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-cyan-600 opacity-100 group-hover:w-full duration-400 ease'></span>
+            <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-focus-color opacity-100 group-hover:w-full duration-400 ease'></span>
             <span className='relative'>차단하기</span>
           </button>
         </div>

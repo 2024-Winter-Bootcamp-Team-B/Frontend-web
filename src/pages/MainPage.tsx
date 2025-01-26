@@ -1,10 +1,7 @@
-import Navbar from '../components/Navbar';
-
-const MainPage = ({ fullpageApi }: { fullpageApi: any }) => {
+const MainPage = () => {
   return (
     <div className='section h-full'>
-      <Navbar fullpageApi={fullpageApi} />
-      <div className='flex flex-col gap-7 justify-center w-2/5 h-[calc(100%-2.75rem)]'>
+      <div className='flex flex-col gap-7 justify-center w-2/5 h-[calc(100%-2.75rem)] mt-11'>
         <p
           className='font-cinzel font-bold text-8xl self-center text-focus-color'
           style={{

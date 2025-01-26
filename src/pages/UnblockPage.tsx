@@ -1,4 +1,3 @@
-import Navbar from '../components/Navbar';
 import ProgressBar from '../components/ProgressBar';
 import jail from '../assets/jail.svg';
 import { checkReq, checkBlock } from '../api/checkBlock';
@@ -7,7 +6,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 
-const UnblockPage = ({ fullpageApi }: { fullpageApi: any }) => {
+const UnblockPage = () => {
   const navigate = useNavigate();
   const { user_id } = useAuthStore();
 
@@ -48,8 +47,7 @@ const UnblockPage = ({ fullpageApi }: { fullpageApi: any }) => {
 
   return (
     <div className='section h-full'>
-      <Navbar fullpageApi={fullpageApi} />
-      <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6'>
+      <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6 mt-11'>
         <ProgressBar />
         <button
           className='bg-white rounded-full self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden '
@@ -59,7 +57,7 @@ const UnblockPage = ({ fullpageApi }: { fullpageApi: any }) => {
               '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
           }}
         >
-          <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-cyan-600 opacity-100 group-hover:w-full duration-400 ease'></span>
+          <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-focus-color opacity-100 group-hover:w-full duration-400 ease'></span>
           <span className='relative'>차단해제</span>
         </button>
         <img src={jail} />
