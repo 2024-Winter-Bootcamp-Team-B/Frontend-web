@@ -152,13 +152,14 @@ const SignUpPage = () => {
         </div>
         <button
           onClick={handleSubmit}
-          className='bg-white font-bold rounded-3xl w-56 h-12 self-center active:bg-[#E5E5F0]'
+          className='bg-white rounded-full self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden '
           style={{
             boxShadow:
               '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
           }}
         >
-          Submit
+          <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-cyan-600 opacity-100 group-hover:w-full duration-400 ease'></span>
+          <span className='relative font-bold'>Submit</span>
         </button>
       </div>
     </div>

@@ -52,14 +52,15 @@ const UnblockPage = ({ fullpageApi }: { fullpageApi: any }) => {
       <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6'>
         <ProgressBar />
         <button
+          className='bg-white rounded-full self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden '
           onClick={() => navigate('/photo')}
-          className='bg-white rounded-3xl w-24 h-12 active:bg-[#E5E5F0]'
           style={{
             boxShadow:
               '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
           }}
         >
-          차단 해제
+          <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-cyan-600 opacity-100 group-hover:w-full duration-400 ease'></span>
+          <span className='relative'>차단해제</span>
         </button>
         <img src={jail} />
       </div>

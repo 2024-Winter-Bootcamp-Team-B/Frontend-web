@@ -136,7 +136,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
               value={urlInput}
               onChange={handleUrlChange}
               placeholder='URL 예시'
-              className='rounded-[30px] w-[1000px] h-12 p-6 placeholder:text-center'
+              className='rounded-[30px] w-[1000px] h-15 p-6 placeholder:text-center'
               style={{
                 boxShadow:
                   '-2px -2px 4px 0px rgba(239, 237, 225, 0.50) inset, 2px 2px 4px 0px rgba(170, 170, 204, 0.25) inset, 5px 5px 10px 0px rgba(170, 170, 204, 0.50) inset, -5px -5px 10px 0px #FFF inset',
@@ -144,13 +144,14 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
             />
             <button
               onClick={handleAddUrl}
-              className='bg-white rounded-3xl w-24 h-12 active:bg-[#E5E5F0]'
+              className='bg-white rounded-full text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden'
               style={{
                 boxShadow:
                   '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
               }}
             >
-              추가
+              <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-cyan-600 opacity-100 group-hover:w-full duration-400 ease'></span>
+              <span className='relative'>추가</span>
             </button>
           </div>
           <div>
@@ -166,14 +167,15 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
             </ul>
           </div>
           <button
-            className='bg-white rounded-3xl w-24 h-12 self-center mt-auto active:bg-[#E5E5F0]'
+            className='bg-white rounded-full self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden '
             onClick={handleBlock}
             style={{
               boxShadow:
                 '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
             }}
           >
-            차단하기
+            <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-cyan-600 opacity-100 group-hover:w-full duration-400 ease'></span>
+            <span className='relative'>차단하기</span>
           </button>
         </div>
       </div>
