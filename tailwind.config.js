@@ -9,6 +9,7 @@ export default {
       },
       colors: {
         'focus-color': '#242320',
+        'progressbar-color': '#BFC0A1',
       },
     },
   },
