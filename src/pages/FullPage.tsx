@@ -55,17 +55,17 @@ const FullPage: React.FC<FullPageProps> = () => {
         navigation={true} // 내비게이션 도트 표시
         anchors={['main', 'explain', 'block', 'unblock', 'stats']} // URL 반영
         verticalCentered={false} // 중앙 정렬 끄기
-        onLeave={(origin, destination, direction) => {
+        onLeave={(_, destination) => {
           handlePageChange(destination.index); // 페이지 전환 시 상태 변경
         }}
-        render={({ fullpageApi }) => {
+        render={() => {
           return (
             <ReactFullpage.Wrapper>
-              <MainPage fullpageApi={fullpageApi} />
-              <ExplainPage fullpageApi={fullpageApi} />
-              <BlockPage fullpageApi={fullpageApi} />
-              <UnblockPage fullpageApi={fullpageApi} />
-              <StatsPage fullpageApi={fullpageApi} />
+              <MainPage />
+              <ExplainPage />
+              <BlockPage />
+              <UnblockPage />
+              <StatsPage />
             </ReactFullpage.Wrapper>
           );
         }}
