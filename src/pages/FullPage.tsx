@@ -5,10 +5,13 @@ import ExplainPage from './ExplainPage';
 import BlockPage from './BlockPage';
 import UnblockPage from './UnblockPage';
 import StatsPage from './StatsPage';
+import useFullpageStore from '../store/fullpageStore';
 
 type FullPageProps = {};
 
 const FullPage: React.FC<FullPageProps> = () => {
+  const setFullpageApi = useFullpageStore((state) => state.setFullpageApi);
+
   const [showHourglass, setShowHourglass] = useState<boolean>(true); // hourglass 가시성 상태
   const [opacity, setOpacity] = useState<number>(1); // hourglass 오퍼시티 상태
 
@@ -55,17 +58,18 @@ const FullPage: React.FC<FullPageProps> = () => {
         navigation={true} // 내비게이션 도트 표시
         anchors={['main', 'explain', 'block', 'unblock', 'stats']} // URL 반영
         verticalCentered={false} // 중앙 정렬 끄기
-        onLeave={(origin, destination, direction) => {
+        onLeave={(_, destination) => {
           handlePageChange(destination.index); // 페이지 전환 시 상태 변경
         }}
         render={({ fullpageApi }) => {
+          setFullpageApi(fullpageApi);
           return (
             <ReactFullpage.Wrapper>
-              <MainPage fullpageApi={fullpageApi} />
-              <ExplainPage fullpageApi={fullpageApi} />
-              <BlockPage fullpageApi={fullpageApi} />
-              <UnblockPage fullpageApi={fullpageApi} />
-              <StatsPage fullpageApi={fullpageApi} />
+              <MainPage />
+              <ExplainPage />
+              <BlockPage />
+              <UnblockPage />
+              <StatsPage />
             </ReactFullpage.Wrapper>
           );
         }}

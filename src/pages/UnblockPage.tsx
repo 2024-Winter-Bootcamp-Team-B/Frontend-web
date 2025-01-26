@@ -1,4 +1,3 @@
-import Navbar from '../components/Navbar';
 import ProgressBar from '../components/ProgressBar';
 import jail from '../assets/jail.svg';
 import { checkReq, checkBlock } from '../api/checkBlock';
@@ -7,7 +6,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 
-const UnblockPage = ({ fullpageApi }: { fullpageApi: any }) => {
+const UnblockPage = () => {
   const navigate = useNavigate();
   const { user_id } = useAuthStore();
 
@@ -48,8 +47,7 @@ const UnblockPage = ({ fullpageApi }: { fullpageApi: any }) => {
 
   return (
     <div className='section h-full'>
-      <Navbar fullpageApi={fullpageApi} />
-      <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6'>
+      <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6 mt-11'>
         <ProgressBar />
         <button
           className='bg-white rounded-full self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden '

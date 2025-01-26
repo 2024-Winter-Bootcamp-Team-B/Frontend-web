@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { fetchMostBlocked } from '../api/mostBlocked';
-import Navbar from '../components/Navbar';
 import dayjs from 'dayjs';
 import { BlockReq, blockSites } from '../api/block';
 import TimePicker from 'react-time-picker';
@@ -9,7 +8,7 @@ import useAuthStore from '../store/authStore';
 
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
 
-const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
+const BlockPage = () => {
   const [startTime, setStartTime] = useState<string>('00:00');
   const [goalTime, setGoalTime] = useState<string>('00:00');
   const [timeDiff, setTimeDiff] = useState<string>('');
@@ -92,8 +91,7 @@ const BlockPage = ({ fullpageApi }: { fullpageApi: any }) => {
 
   return (
     <div className='section h-full'>
-      <Navbar fullpageApi={fullpageApi} />
-      <div className='flex h-[calc(100%-2.75rem)]'>
+      <div className='flex h-[calc(100%-2.75rem)] mt-11'>
         <div className='flex flex-col justify-center gap-12 bg-[#F2F6F5] p-4 self-center rounded-[30px]'>
           {mostBlocked.map((site, index) => (
             <img

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
 import { fetchStat, StatReq } from '../api/stat';
 import { Line } from 'react-chartjs-2';
 import {
@@ -27,7 +26,7 @@ ChartJS.register(
   Legend,
 );
 
-const StatsPage = ({ fullpageApi }: { fullpageApi: any }) => {
+const StatsPage = () => {
   const { user_id } = useAuthStore();
   const [labels, setLabels] = useState<string[]>([]); // x축 (date)
   const [goalData, setGoalData] = useState<number[]>([]); // y축 (goal)
@@ -119,8 +118,7 @@ const StatsPage = ({ fullpageApi }: { fullpageApi: any }) => {
 
   return (
     <div className='section h-full'>
-      <Navbar fullpageApi={fullpageApi} />
-      <div className='h-[calc(100%-2.75rem)]'>
+      <div className='h-[calc(100%-2.75rem)] mt-11'>
         <Line data={data} options={options} className='h-screen' />
       </div>
     </div>
