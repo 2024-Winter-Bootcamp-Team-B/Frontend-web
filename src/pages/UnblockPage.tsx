@@ -12,22 +12,22 @@ const UnblockPage = ({ fullpageApi }: { fullpageApi: any }) => {
   const { user_id } = useAuthStore();
 
   //차단 해제하기 API
-  useEffect(() => {
-    if (!user_id) {
-      return;
-    }
-    const unblock: UnblockReq = {
-      user_id,
-      result: 1,
-    };
-    unblockSites(unblock)
-      .then((response) => {
-        if (response) {
-          console.log(response);
-        }
-      })
-      .catch((error) => console.error(error));
-  });
+  // useEffect(() => {
+  //   if (!user_id) {
+  //     return;
+  //   }
+  //   const unblock: UnblockReq = {
+  //     user_id,
+  //     result: 1,
+  //   };
+  //   unblockSites(unblock)
+  //     .then((response) => {
+  //       if (response) {
+  //         console.log(response);
+  //       }
+  //     })
+  //     .catch((error) => console.error(error));
+  // });
 
   // 차단한 사이트 확인 API
   useEffect(() => {
