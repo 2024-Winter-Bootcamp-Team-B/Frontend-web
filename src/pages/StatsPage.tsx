@@ -10,6 +10,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
   ChartOptions,
   TooltipItem,
 } from 'chart.js';
@@ -24,6 +25,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  Filler,
 );
 
 const StatsPage = () => {
@@ -39,7 +41,7 @@ const StatsPage = () => {
         label: '목표 집중 시간',
         data: goalData,
         borderWidth: 2,
-        backgroundColor: 'rgba(255, 205, 86, 0.9)',
+        backgroundColor: 'rgba(255, 205, 86, 0.3)',
         borderColor: 'rgba(255, 205, 86, 1)',
         fill: true,
       },
@@ -47,7 +49,7 @@ const StatsPage = () => {
         label: '실제 집중 시간',
         data: actualData,
         borderWidth: 2,
-        backgroundColor: 'rgba(54, 162, 235, 0.9)',
+        backgroundColor: 'rgba(54, 162, 235, 0.3)',
         borderColor: 'rgba(54, 162, 235, 1)',
         fill: true,
       },
