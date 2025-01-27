@@ -39,7 +39,7 @@ const FullPage: React.FC<FullPageProps> = () => {
       <div
         className='fixed top-0 left-0 w-full h-full bg-cover bg-center z-0'
         style={{
-          backgroundImage: "url('/src/assets/background.png')",
+          backgroundImage: "url('/assets/background.png')",
         }}
       ></div>
       {/* hourglass 배경 */}
@@ -47,7 +47,7 @@ const FullPage: React.FC<FullPageProps> = () => {
         <div
           className='fixed top-0 right-0 object-contain w-[1500px] h-full bg-cover bg-center z-0 transition-opacity duration-1000'
           style={{
-            backgroundImage: "url('/src/assets/hourglass.svg')",
+            backgroundImage: "url('/assets/hourglass.svg')",
             opacity: opacity,
             transition: 'opacity 0.5s ease-in-out',
           }}
