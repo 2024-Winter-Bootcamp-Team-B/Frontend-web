@@ -91,6 +91,28 @@ const BlockPage = () => {
       .catch((error) => console.error(error));
   };
 
+  // 드래그 시작 핸들러
+  const handleDragStart = (
+    e: React.DragEvent<HTMLImageElement>,
+    url: string,
+  ) => {
+    e.dataTransfer.setData('text/plain', url);
+  };
+
+  // 드롭 핸들러
+  const handleDrop = (e: React.DragEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const droppedUrl = e.dataTransfer.getData('text/plain');
+    if (droppedUrl) {
+      setUrlList((prevList) => [...prevList, droppedUrl]);
+    }
+  };
+
+  // 드래그 오버 핸들러
+  const handleDragOver = (e: React.DragEvent<HTMLInputElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <div className='section h-full'>
       <div className='flex h-[calc(100%-2.75rem)] mt-11'>
@@ -99,6 +121,8 @@ const BlockPage = () => {
             <img
               key={index}
               src={`https://www.google.com/s2/favicons?sz=32&domain_url=${site}`}
+              draggable
+              onDragStart={(e) => handleDragStart(e, site)} // 드래그 시작 이벤트
             />
           ))}
         </div>
@@ -130,12 +154,14 @@ const BlockPage = () => {
             />
             <p className='w-[500px]'>{timeDiff}</p>
           </div>
-          <p className='text-xl'>URL을 입력하세요</p>
+          <p className='text-xl'>URL을 입력하거나 아이콘을 드래그하세요</p>
           <div className='flex gap-4'>
             <input
               type='url'
               value={urlInput}
               onChange={handleUrlChange}
+              onDrop={handleDrop} // 드롭 이벤트 처리
+              onDragOver={handleDragOver} // 드래그 오버 이벤트 처리
               placeholder='URL 예시'
               className='rounded-[30px] w-[1000px] h-15 p-6 placeholder:text-center'
               style={{
