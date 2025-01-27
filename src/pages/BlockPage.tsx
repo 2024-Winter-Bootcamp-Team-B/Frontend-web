@@ -2,17 +2,23 @@ import { useEffect, useState } from 'react';
 import { fetchMostBlocked } from '../api/mostBlocked';
 import dayjs from 'dayjs';
 import { BlockReq, blockSites } from '../api/block';
-import TimePicker from 'react-time-picker';
+import { TimeRangePicker } from 'rsuite';
 import duration from 'dayjs/plugin/duration';
 import useAuthStore from '../store/authStore';
+import 'rsuite/dist/rsuite.min.css';
+import { format } from 'rsuite/esm/internals/utils/date';
 
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
 
 const BlockPage = () => {
-  const [startTime, setStartTime] = useState<string>(dayjs().format('HH:mm'));
-  const [goalTime, setGoalTime] = useState<string>(
-    dayjs().add(1, 'hour').format('HH:mm'),
-  );
+  const todayDate = new Date();
+  const todayDate2 = new Date(todayDate);
+  todayDate2.setHours(todayDate2.getHours() + 1);
+
+  const [Time, setTime] = useState<[Date, Date] | null>([
+    todayDate,
+    todayDate2,
+  ]);
   const [timeDiff, setTimeDiff] = useState<string>('');
   const [urlInput, setUrlInput] = useState<string>('');
   const [urlList, setUrlList] = useState<string[]>([]);
@@ -33,28 +39,33 @@ const BlockPage = () => {
 
   // 차단 API
 
-  // 시간 차이 계산
+  //시간 차이 계산
   const calcTimeDiff = () => {
-    const todayDate = dayjs().format('YYYY-MM-DD');
-    const start = dayjs(`${todayDate}T${startTime}`);
-    const goal = dayjs(`${todayDate}T${goalTime}`);
-    const diff = dayjs.duration(goal.diff(start));
-    const hours = diff.hours();
-    const minutes = diff.minutes();
-    setTimeDiff(`${hours}H ${minutes}M`);
+    if (!Time) {
+      setTimeDiff('');
+      return;
+    }
+    const [start_time, end_time] = Time;
+
+    const timeDiffMilli = end_time.getTime() - start_time.getTime();
+    const totalMinutes = Math.floor(timeDiffMilli / (1000 * 60));
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    const formattedDuration = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+    setTimeDiff(formattedDuration);
+
+    console.log(formattedDuration);
+    console.log(Time[0].toISOString());
+    console.log(Time[1].toISOString());
   };
 
-  // startTimte 또는 goalTime이 변경될 때마다 시간 차이 계산
+  //startTimte 또는 goalTime이 변경될 때마다 시간 차이 계산
   useEffect(() => {
     calcTimeDiff();
-  }, [startTime, goalTime]);
+  }, [Time]);
 
-  const handleStartTimeChange = (value: string | null) => {
-    setStartTime(value || dayjs().format('HH:mm'));
-  };
-
-  const handleGoalTimeChange = (value: string | null) => {
-    setGoalTime(value || dayjs().add(1, 'hour').format('HH:mm'));
+  const handleTimeChange = (value: [Date, Date] | null) => {
+    setTime(value || null);
   };
 
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,14 +82,13 @@ const BlockPage = () => {
   };
 
   const handleBlock = () => {
-    const todayDate = dayjs().format('YYYY-MM-DD');
-    if (!user_id) {
+    if (!user_id || !Time) {
       return;
     }
     const block: BlockReq = {
       user_id,
-      start_time: dayjs(`${todayDate}T${startTime}`).toISOString(),
-      goal_time: dayjs(`${todayDate}T${goalTime}`).toISOString(),
+      start_time: Time[0].toISOString(),
+      goal_time: Time[1].toISOString(),
       sites: urlList,
     };
 
@@ -105,28 +115,13 @@ const BlockPage = () => {
         <div className='flex flex-col items-start h-full w-full px-16 py-8 gap-6'>
           {/* 오늘 날짜 표시 */}
           <p className='text-xl'>{today}</p>
-          <p>시간을 입력하세요</p>
+          <p className='text-xl'>시간을 입력하세요</p>
           <div className='font-abril text-8xl flex justify-between items-center w-full'>
-            <TimePicker
-              onChange={handleStartTimeChange}
-              value={startTime}
-              disableClock={true}
-              clearIcon={null}
-              format='HH:mm'
-              className='w-[300px]'
-              hourPlaceholder='00'
-              minutePlaceholder='00'
-            />
-            <p>~</p>
-            <TimePicker
-              onChange={handleGoalTimeChange}
-              value={goalTime}
-              disableClock={true}
-              clearIcon={null}
-              format='HH:mm'
-              className='w-[300px]'
-              hourPlaceholder='00'
-              minutePlaceholder='00'
+            <TimeRangePicker
+              onChange={handleTimeChange}
+              value={Time}
+              cleanable={false}
+              className='w-[700px]'
             />
             <p className='w-[500px]'>{timeDiff}</p>
           </div>
@@ -137,7 +132,7 @@ const BlockPage = () => {
               value={urlInput}
               onChange={handleUrlChange}
               placeholder='URL 예시'
-              className='rounded-[30px] w-[1000px] h-15 p-6 placeholder:text-center'
+              className='rounded-[30px] w-[1000px] h-12 p-6 placeholder:text-center'
               style={{
                 boxShadow:
                   '-2px -2px 4px 0px rgba(239, 237, 225, 0.50) inset, 2px 2px 4px 0px rgba(170, 170, 204, 0.25) inset, 5px 5px 10px 0px rgba(170, 170, 204, 0.50) inset, -5px -5px 10px 0px #FFF inset',
@@ -145,7 +140,7 @@ const BlockPage = () => {
             />
             <button
               onClick={handleAddUrl}
-              className='bg-white rounded-full text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden'
+              className='bg-white rounded-full text-xl px-12 py-2 hover:text-white group relative flex items-center overflow-hidden'
               style={{
                 boxShadow:
                   '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
