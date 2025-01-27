@@ -1,7 +1,7 @@
 import ProgressBar from '../components/ProgressBar';
 import jail from '../assets/jail.svg';
 import { checkReq, checkBlock } from '../api/checkBlock';
-import { UnblockReq, unblockSites } from '../api/unblock';
+// import { UnblockReq, unblockSites } from '../api/unblock';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
