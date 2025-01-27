@@ -18,6 +18,7 @@ const LoginPage = () => {
           console.log(response);
           if (response.user_id && response.user_name) {
             login(response.user_id, response.user_name);
+            navigate('/');
           }
         }
       })
