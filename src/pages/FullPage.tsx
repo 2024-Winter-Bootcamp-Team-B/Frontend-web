@@ -45,7 +45,7 @@ const FullPage: React.FC<FullPageProps> = () => {
       {/* hourglass 배경 */}
       {showHourglass && (
         <div
-          className='fixed top-0 right-0 object-contain w-[1500px] h-full bg-cover bg-center z-0 transition-opacity duration-1000'
+          className='fixed top-0 right-0 object-contain w-[800px] h-full bg-cover bg-center z-0 transition-opacity duration-1000'
           style={{
             backgroundImage: "url('/assets/hourglass.svg')",
             opacity: opacity,
