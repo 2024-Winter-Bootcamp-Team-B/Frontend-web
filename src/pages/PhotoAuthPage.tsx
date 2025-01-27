@@ -15,7 +15,7 @@ const PhotoAuthPage = () => {
   // 이진수 기반 이미지 경로 배열 생성
   const exampleImages = Array.from({ length: 32 }, (_, i) => {
     const binaryString = i.toString(2).padStart(5, '0'); // 5자리 이진수 생성
-    return `/assets/${binaryString}.png`;
+    return `/assets/exampleImages/${binaryString}.png`;
   });
 
   // 컴포넌트 마운트 시 랜덤 이미지 선택
