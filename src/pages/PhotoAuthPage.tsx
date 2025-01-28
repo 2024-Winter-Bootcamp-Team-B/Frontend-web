@@ -69,6 +69,7 @@ const PhotoAuthPage = () => {
                     navigate('/meme'); // 성공 처리
                   } else {
                     alert(response?.result?.message || '인증 실패');
+                    navigate('/fail');
                   }
                 } else if (response?.status === 'FAILURE') {
                   clearInterval(interval); // 상태 확인 중지
