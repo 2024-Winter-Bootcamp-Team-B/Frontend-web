@@ -5,7 +5,7 @@ import { BlockReq, blockSites } from '../api/block';
 import { TimeRangePicker } from 'rsuite';
 import duration from 'dayjs/plugin/duration';
 import useAuthStore from '../store/authStore';
-import 'rsuite/dist/rsuite.min.css';
+// import 'rsuite/dist/rsuite.min.css';
 import { format } from 'rsuite/esm/internals/utils/date';
 
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
