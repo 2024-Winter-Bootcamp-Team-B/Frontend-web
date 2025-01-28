@@ -1,4 +1,4 @@
-import ProgressBar from '../components/ProgressBar';
+import { ProgressBar } from '../components/ProgressBar';
 import jail from '../assets/jail.svg';
 import { checkReq, checkBlock } from '../api/checkBlock';
 // import { UnblockReq, unblockSites } from '../api/unblock';

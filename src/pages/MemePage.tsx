@@ -6,6 +6,10 @@ import jail from '../assets/jail.svg';
 import meme from '../assets/memeEx.svg';
 import { checkReq, checkBlock } from '../api/checkBlock';
 import useAuthStore from '../store/authStore';
+import {
+  ProgressBar,
+  DurationElapsedPercentage,
+} from '../components/ProgressBar';
 
 const MemePage = () => {
   const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
@@ -194,6 +198,18 @@ const MemePage = () => {
     };
   }, [isDragging]);
 
+  const percentageData = DurationElapsedPercentage();
+
+  if (!percentageData) {
+    return (
+      <div className='font-semibold text-4xl'>
+        <p>목표 진행 데이터를 불러오는 중입니다...</p>
+      </div>
+    );
+  }
+
+  const [totalDuration, elapsedTime, percentage] = percentageData;
+
   return (
     <div
       ref={containerRef}
@@ -210,11 +226,13 @@ const MemePage = () => {
           </div>
 
           <div className='font-semibold text-4xl'>
-            <p>전체 목표의 62.5%를 달성했습니다</p>
-            <p>목표시간 4H 달성시간 2H 30M</p>
+            <p>전체 목표의 {percentage}%를 달성했습니다</p>
+            <p>
+              목표시간 {totalDuration}, 달성시간{elapsedTime}
+            </p>
           </div>
 
-          <div className='bg-white h-12 rounded-3xl' />
+          <ProgressBar />
 
           <div className='jail-container w-full' ref={jailRef}>
             <img src={jail} alt='Jail' className='jail-image' />
