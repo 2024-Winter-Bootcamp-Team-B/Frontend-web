@@ -8,6 +8,7 @@ export type BlockInfoType = {
 };
 
 // 공통 유틸 함수: BlockInfo 가져오기
+
 const useBlockInfo = (userId: number) => {
   const [blockInfo, setBlockInfo] = useState<BlockInfoType | null>(null);
 
@@ -65,7 +66,7 @@ const calculateProgress = (blockInfo: BlockInfoType) => {
 export const ProgressBar = ({ userId }: { userId: number }) => {
   const [progress, setProgress] = useState(0);
   const blockInfo = useBlockInfo(userId); // userId를 전달하도록 수정
-
+  
   useEffect(() => {
     if (!blockInfo) return;
 

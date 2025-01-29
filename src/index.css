@@ -12,17 +12,29 @@
   height: 100% !important;
 }
 
-/* 입력 필드와 선행 0을 포함한 스타일 */
-.react-time-picker__inputGroup__leadingZero,
-.react-time-picker__inputGroup__input {
-  background-color: transparent; /* 배경 투명 */
+.rs-date-range-input {
+  font-size: 18px !important; /* 텍스트 크기 증가 */
+  text-align: center !important; /* 텍스트 중앙 정렬 */
+  line-height: normal !important; /* 줄 높이 조정 (필요시) */
+  background: transparent;
 }
 
-/* 입력 필드와 선행 0 정렬하기 */
-.react-time-picker__inputGroup {
-  display: flex;
-  align-items: center; /* 세로 중앙 정렬 */
-  justify-content: center; /* 가로 중앙 정렬 */
+.rs-picker-input-group {
+  background: transparent !important; /* 전체 그룹 배경 투명 */
+  border: none !important; /* 테두리 제거 (필요시) */
+  box-shadow: none !important; /* 그림자 제거 (필요시) */
+  outline: none !important; /* 파란 선 제거 */
+}
+
+.rs-picker-input-group .rs-date-range-input {
+  background: transparent !important; /* 입력 필드 배경 투명 */
+  border: none !important; /* 입력 필드 테두리 제거 */
+  text-align: center !important; /* 텍스트 중앙 정렬 (필요시) */
+  font-size: 96px !important; /* 텍스트 크기 증가 (필요시) */
+}
+
+.rs-picker-input-group .rs-input-group-addon {
+  background: transparent !important; /* 아이콘 배경 투명 */
 }
 
 .fp-watermark {

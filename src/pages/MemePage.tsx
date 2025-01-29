@@ -6,8 +6,10 @@ import jailRight from '../assets/jailRight.svg';
 import { checkReq, checkBlock } from '../api/checkBlock';
 import { getAllSites } from '../api/checkSites';
 import useAuthStore from '../store/authStore';
-import './MemePage.css';
-import { ProgressBar, DurationElapsedPercentage } from '../components/ProgressBar';
+import {
+  ProgressBar,
+  DurationElapsedPercentage,
+} from '../components/ProgressBar';
 
 const MemePage = () => {
   const navigate = useNavigate();
@@ -273,6 +275,18 @@ useEffect(() => {
   }
   const [totalDuration, elapsedTime, percentage] = percentageData;
 
+  const percentageData = DurationElapsedPercentage();
+
+  if (!percentageData) {
+    return (
+      <div className='font-semibold text-4xl'>
+        <p>목표 진행 데이터를 불러오는 중입니다...</p>
+      </div>
+    );
+  }
+
+  const [totalDuration, elapsedTime, percentage] = percentageData;
+
   return (
     <div ref={containerRef} className="w-full h-full flex flex-col items-center px-16 py-8" style={{ overflow: 'hidden' }}>
       <Logo />
@@ -312,6 +326,7 @@ useEffect(() => {
                     handleMouseDown(e, index);
                   
                 }} 
+
               />
             ))}
             <img src={jailRight} alt="Jail Right" className={`jail-right ${isJailOpen ? 'open' : ''}`} />
