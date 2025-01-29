@@ -71,8 +71,6 @@
 
 // export default UnblockPage;
 
-
-
 import { useEffect, useRef, useState } from 'react';
 import { ProgressBar } from '../components/ProgressBar';
 import jail from '../assets/jail.svg';
@@ -80,6 +78,7 @@ import { checkReq, checkBlock } from '../api/checkBlock'; // checkBlock API
 import useAuthStore from '../store/authStore';
 import { useNavigate } from 'react-router-dom';
 import './UnblockPage.css';
+import useBlockStore from '../store/blockStore';
 
 const UnblockPage = () => {
   const navigate = useNavigate();
@@ -88,14 +87,19 @@ const UnblockPage = () => {
   const containerRef = useRef<HTMLDivElement | null>(null); // 컨테이너 참조
 
   const [blockedSites, setBlockedSites] = useState<string[]>([]); // 차단된 사이트 목록
-  const [iconPositions, setIconPositions] = useState<{ x: number; y: number }[]>([]);
-  const [iconVelocities, setIconVelocities] = useState<{ dx: number; dy: number }[]>([]);
+  const [iconPositions, setIconPositions] = useState<
+    { x: number; y: number }[]
+  >([]);
+  const [iconVelocities, setIconVelocities] = useState<
+    { dx: number; dy: number }[]
+  >([]);
+  const { blockedSites: globalBlockedSites } = useBlockStore();
 
   // 감옥 내부 하드코딩된 좌표 범위 (임의로 설정 가능)
-  const JAIL_X_MIN = 60;  // 감옥 내부 X 최소 위치
-  const JAIL_X_MAX = 945;  // 감옥 내부 X 최대 위치
-  const JAIL_Y_MIN = 10;  // 감옥 내부 Y 최소 위치
-  const JAIL_Y_MAX = 420;  // 감옥 내부 Y 최대 위치
+  const JAIL_X_MIN = 60; // 감옥 내부 X 최소 위치
+  const JAIL_X_MAX = 945; // 감옥 내부 X 최대 위치
+  const JAIL_Y_MIN = 10; // 감옥 내부 Y 최소 위치
+  const JAIL_Y_MAX = 420; // 감옥 내부 Y 최대 위치
 
   // 페이지 스크롤 비활성화
   useEffect(() => {
@@ -123,7 +127,7 @@ const UnblockPage = () => {
             response.sites.map(() => ({
               x: Math.random() * (JAIL_X_MAX - JAIL_X_MIN) + JAIL_X_MIN,
               y: Math.random() * (JAIL_Y_MAX - JAIL_Y_MIN) + JAIL_Y_MIN,
-            }))
+            })),
           );
 
           // 랜덤한 방향으로 초기 속도 설정
@@ -131,12 +135,12 @@ const UnblockPage = () => {
             response.sites.map(() => ({
               dx: (Math.random() - 0.5) * 15, // 속도 조정 가능
               dy: (Math.random() - 0.5) * 15,
-            }))
+            })),
           );
         }
       })
       .catch((error) => console.error('Error fetching blocked sites:', error));
-  }, [user_id]);
+  }, [globalBlockedSites]);
 
   // 아이콘이 감옥 내부에서 움직이도록 애니메이션 설정
   useEffect(() => {
@@ -158,7 +162,7 @@ const UnblockPage = () => {
           }
 
           return { x: newX, y: newY };
-        })
+        }),
       );
     }, 25); // 50ms 간격으로 업데이트
 
@@ -175,28 +179,36 @@ const UnblockPage = () => {
   };
 
   return (
-    <div ref={containerRef} className="section h-full relative" style={{ height: '100vh', overflow: 'hidden' }}>
-      <div className="flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6 mt-11">
+    <div
+      ref={containerRef}
+      className='section h-full relative'
+      style={{ height: '100vh', overflow: 'hidden' }}
+    >
+      <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6 mt-11'>
         {/* ProgressBar */}
         {user_id && <ProgressBar userId={user_id} />}
 
         <button
-          className="bg-white rounded-full self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden"
+          className='bg-white rounded-full self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden'
           onClick={handleUnblockClick}
           style={{
-            boxShadow: '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
+            boxShadow:
+              '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
           }}
         >
-          <span className="absolute h-15 top-0 left-0 w-0 h-full transition-all bg-focus-color opacity-100 group-hover:w-full duration-400 ease"></span>
-          <span className="relative">차단해제</span>
+          <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-focus-color opacity-100 group-hover:w-full duration-400 ease'></span>
+          <span className='relative'>차단해제</span>
         </button>
 
         {/* Jail 이미지와 아이콘 */}
-        <div ref={jailRef} className="relative flex justify-center items-center">
+        <div
+          ref={jailRef}
+          className='relative flex justify-center items-center'
+        >
           {/* 감옥 이미지 */}
           <img
             src={jail}
-            alt="Jail"
+            alt='Jail'
             style={{
               width: '90vw',
               maxWidth: '1000px',
