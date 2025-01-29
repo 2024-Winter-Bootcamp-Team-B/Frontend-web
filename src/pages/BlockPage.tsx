@@ -5,6 +5,7 @@ import { BlockReq, blockSites } from '../api/block';
 import { TimeRangePicker } from 'rsuite';
 import duration from 'dayjs/plugin/duration';
 import useAuthStore from '../store/authStore';
+import { useNavigate } from 'react-router-dom';
 
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
 
@@ -23,6 +24,8 @@ const BlockPage = () => {
   const [mostBlocked, setMostBlocked] = useState<string[]>([]);
   const today = dayjs().format('YYYY년 MM월 DD일'); // dayjs 라이브러리로 오늘 날짜 가져오기
   const { user_id } = useAuthStore();
+
+  const navigate = useNavigate();
 
   // 최고 빈도 사이트 5개 API
   useEffect(() => {
@@ -79,6 +82,7 @@ const BlockPage = () => {
 
   const handleBlock = () => {
     if (!user_id || !Time) {
+      navigate('/login');
       return;
     }
     const block: BlockReq = {
