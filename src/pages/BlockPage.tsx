@@ -45,6 +45,7 @@ const BlockPage = () => {
       setTimeDiff('');
       return;
     }
+
     const [start_time, end_time] = Time;
 
     const timeDiffMilli = end_time.getTime() - start_time.getTime();
@@ -145,7 +146,7 @@ const BlockPage = () => {
               onChange={handleTimeChange}
               value={Time}
               cleanable={false}
-              className='w-[700px]'
+              size='sm'
             />
             <p className='w-[500px]'>{timeDiff}</p>
           </div>

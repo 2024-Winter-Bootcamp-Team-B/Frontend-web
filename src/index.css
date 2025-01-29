@@ -17,6 +17,7 @@
   text-align: center !important; /* 텍스트 중앙 정렬 */
   line-height: normal !important; /* 줄 높이 조정 (필요시) */
   background: transparent;
+  width: 800px !important;
 }
 
 .rs-picker-input-group {
@@ -35,6 +36,10 @@
 
 .rs-picker-input-group .rs-input-group-addon {
   background: transparent !important; /* 아이콘 배경 투명 */
+}
+
+.rs-input-group-addon {
+  display: none; /* 요소를 완전히 숨김 */
 }
 
 .fp-watermark {
