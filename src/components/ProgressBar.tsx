@@ -8,13 +8,16 @@ export type BlockInfoType = {
 };
 
 // 공통 유틸 함수: BlockInfo 가져오기
-const useBlockInfo = () => {
+
+const useBlockInfo = (userId: number) => {
   const [blockInfo, setBlockInfo] = useState<BlockInfoType | null>(null);
 
   useEffect(() => {
-    BlockInfo()
+    if (!userId) return; // userId가 없으면 실행하지 않음
+
+    BlockInfo({ user_id: userId })
       .then((data) => {
-        if (data) {
+        if (data?.start_time && data?.goal_time) {
           setBlockInfo({
             startTime: data.start_time,
             goalTime: data.goal_time,
@@ -24,10 +27,12 @@ const useBlockInfo = () => {
       .catch((error) => {
         console.error('Error fetching block info:', error);
       });
-  }, []);
+  }, [userId]); // userId가 변경될 때마다 실행
 
   return blockInfo;
 };
+
+export default useBlockInfo;
 
 // 공통 유틸 함수: millisecond를 HH:MM 형식으로 변환
 const formatMillisecondsToHHMM = (milliseconds: number): string => {
@@ -39,14 +44,14 @@ const formatMillisecondsToHHMM = (milliseconds: number): string => {
 
 // 공통 유틸 함수: 현재 진행률 계산
 const calculateProgress = (blockInfo: BlockInfoType) => {
-  const currentTimeUTC = new Date();
-  const currentTimeKST = new Date(
-    currentTimeUTC.getTime() + 9 * 60 * 60 * 1000,
-  ); // UTC + 9시간
+  //const currentTimeUTC = new Date();
+  const currentTimeKST = new Date();
+  //   currentTimeUTC.getTime() + 9 * 60 * 60 * 1000,
+  // ); // UTC + 9시간
   const startTime = new Date(blockInfo.startTime);
   const goalTime = new Date(blockInfo.goalTime);
 
-  const totalDuration = goalTime.getTime() - startTime.getTime(); // 총 차단 시간
+  const totalDuration = goalTime.getTime() - startTime.getTime(); // 총 차단 시간 = > 목표시간임 이게
   const elapsedTime = currentTimeKST.getTime() - startTime.getTime(); // 경과 시간
 
   const percentage = Math.max(
@@ -58,10 +63,10 @@ const calculateProgress = (blockInfo: BlockInfoType) => {
 };
 
 // ProgressBar 컴포넌트
-export const ProgressBar = () => {
+export const ProgressBar = ({ userId }: { userId: number }) => {
   const [progress, setProgress] = useState(0);
-  const blockInfo = useBlockInfo();
-
+  const blockInfo = useBlockInfo(userId); // userId를 전달하도록 수정
+  
   useEffect(() => {
     if (!blockInfo) return;
 
@@ -91,10 +96,10 @@ export const ProgressBar = () => {
 };
 
 // DurationElapsedPercentage 유틸 함수
-export const DurationElapsedPercentage = ():
+export const DurationElapsedPercentage = (userId : number):
   | [string, string, string]
   | null => {
-  const blockInfo = useBlockInfo();
+  const blockInfo = useBlockInfo(userId); // userId를 전달하도록 수정
 
   if (!blockInfo) return null;
 
