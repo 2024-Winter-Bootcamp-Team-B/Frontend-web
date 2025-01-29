@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchMostBlocked } from '../api/mostBlocked';
 import dayjs from 'dayjs';
 import { BlockReq, blockSites } from '../api/block';
-import { TimeRangePicker } from 'rsuite';
+import { TimePicker } from 'rsuite';
 import duration from 'dayjs/plugin/duration';
 import useAuthStore from '../store/authStore';
 import { useNavigate } from 'react-router-dom';
@@ -11,15 +11,9 @@ import useBlockStore from '../store/blockStore';
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
 
 const BlockPage = () => {
-  const todayDate = new Date();
-  const todayDate2 = new Date(todayDate);
-  todayDate2.setHours(todayDate2.getHours() + 1);
-
-  const [Time, setTime] = useState<[Date, Date] | null>([
-    todayDate,
-    todayDate2,
-  ]);
-  const [timeDiff, setTimeDiff] = useState<string>('');
+  const [startTime, setStartTime] = useState<Date | null>(null);
+  const [goalTime, setGoalTime] = useState<Date | null>(null);
+  const [timeDiff, setTimeDiff] = useState<string>('00:00');
   const [urlInput, setUrlInput] = useState<string>('');
   const [urlList, setUrlList] = useState<string[]>([]);
   const [mostBlocked, setMostBlocked] = useState<string[]>([]);
@@ -43,14 +37,18 @@ const BlockPage = () => {
 
   //시간 차이 계산
   const calcTimeDiff = () => {
-    if (!Time) {
-      setTimeDiff('');
+    if (!startTime || !goalTime) {
+      setTimeDiff('00:00');
+      return;
+    } else if (isNaN(startTime.getTime()) || isNaN(goalTime.getTime())) {
+      setTimeDiff('00:00');
       return;
     }
 
-    const [start_time, end_time] = Time;
+    const start_time = startTime;
+    const goal_time = goalTime;
 
-    const timeDiffMilli = end_time.getTime() - start_time.getTime();
+    const timeDiffMilli = goal_time.getTime() - start_time.getTime();
     const totalMinutes = Math.floor(timeDiffMilli / (1000 * 60));
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
@@ -60,11 +58,19 @@ const BlockPage = () => {
 
   //startTimte 또는 goalTime이 변경될 때마다 시간 차이 계산
   useEffect(() => {
+    if (!startTime || !goalTime) {
+      return;
+    }
     calcTimeDiff();
-  }, [Time]);
+  }, [startTime, goalTime]);
 
-  const handleTimeChange = (value: [Date, Date] | null) => {
-    setTime(value || null);
+  const handleStartTimeChange = (value: Date | null) => {
+    setStartTime(value || null);
+  };
+
+  const handleGoalTimeChange = (value: Date | null) => {
+    setGoalTime(value || null);
+    console.log(goalTime);
   };
 
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,14 +88,14 @@ const BlockPage = () => {
   };
 
   const handleBlock = () => {
-    if (!user_id || !Time) {
+    if (!user_id || !startTime || !goalTime) {
       navigate('/login');
       return;
     }
     const block: BlockReq = {
       user_id,
-      start_time: Time[0].toISOString(),
-      goal_time: Time[1].toISOString(),
+      start_time: startTime.toISOString(),
+      goal_time: goalTime.toISOString(),
       sites: urlList,
     };
 
@@ -147,15 +153,27 @@ const BlockPage = () => {
         <div className='flex flex-col items-start h-full w-full px-16 py-8 gap-6'>
           {/* 오늘 날짜 표시 */}
           <p className='text-xl'>{today}</p>
-          <p className='text-xl'>시간을 입력하세요</p>
+          <div className='flex justify-between gap-[720px]'>
+            <p className='text-xl'>시간을 입력하세요</p>
+            <p className='text-xl'>차단 지속 시간</p>
+          </div>
           <div className='font-abril text-8xl flex justify-between items-center w-full'>
-            <TimeRangePicker
-              onChange={handleTimeChange}
-              value={Time}
+            <TimePicker
+              onChange={handleStartTimeChange}
+              value={startTime}
               cleanable={false}
               size='sm'
+              placeholder='00:00'
             />
-            <p className='w-[500px]'>{timeDiff}</p>
+            <p>~</p>
+            <TimePicker
+              onChange={handleGoalTimeChange}
+              value={goalTime}
+              cleanable={false}
+              size='sm'
+              placeholder='00:00'
+            />
+            <p className='w-[400px]'>{timeDiff}</p>
           </div>
           <p className='text-xl'>URL을 입력하거나 아이콘을 드래그하세요</p>
           <div className='flex gap-4'>
