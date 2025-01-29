@@ -1,0 +1,43 @@
+/* .jail-left, .jail-right {
+    transition: transform 1s ease-in-out;
+  }
+  
+  .jail-left.open {
+    transform: translateX(-100px);
+  }
+  
+  .jail-right.open {
+    transform: translateX(100px);
+  }
+ */
+
+.jail-left,
+.jail-right {
+  transition:
+    transform 1s ease-in-out,
+    opacity 0.5s ease-in-out 1s; /* transform과 opacity 애니메이션 */
+  opacity: 1; /* 기본적으로 보이게 설정 */
+}
+
+.jail-left.open {
+  transform: translateX(-100px);
+  opacity: 0; /* 감옥이 열린 후 서서히 사라짐 */
+}
+
+.jail-right.open {
+  transform: translateX(100px);
+  opacity: 0;
+}
+
+.jail-left.hidden,
+.jail-right.hidden {
+  display: none; /* 애니메이션이 끝나면 완전히 제거 */
+}
+
+/* MemePage.css */
+body,
+html {
+  overflow: hidden; /* 페이지 전체 스크롤 비활성화 */
+  margin: 0;
+  padding: 0;
+}

@@ -7,6 +7,7 @@ import duration from 'dayjs/plugin/duration';
 import useAuthStore from '../store/authStore';
 import 'rsuite/dist/rsuite.min.css';
 
+
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
 
 const BlockPage = () => {
