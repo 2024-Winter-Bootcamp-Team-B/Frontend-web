@@ -74,6 +74,7 @@ const BlockPage = () => {
     }
     setUrlList((prevList) => [...prevList, urlInput]);
     setUrlInput('');
+    console.log(urlList);
   };
 
   const handleBlock = () => {
@@ -111,6 +112,12 @@ const BlockPage = () => {
     if (droppedUrl) {
       setUrlList((prevList) => [...prevList, droppedUrl]);
     }
+  };
+
+  // url 삭제
+  const handleRemoveUrl = (index: number) => {
+    setUrlList((prevList) => prevList.filter((_, i) => i !== index));
+    console.log(urlList);
   };
 
   // 드래그 오버 핸들러
@@ -179,6 +186,12 @@ const BlockPage = () => {
                     src={`https://www.google.com/s2/favicons?sz=32&domain_url=${url}`}
                   />
                   <p>{url}</p>
+                  <button
+                    onClick={() => handleRemoveUrl(index)}
+                    className='text-red-500 hover:text-red-700'
+                  >
+                    ✕
+                  </button>
                 </li>
               ))}
             </ul>
