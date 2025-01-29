@@ -5,8 +5,6 @@ import { BlockReq, blockSites } from '../api/block';
 import { TimeRangePicker } from 'rsuite';
 import duration from 'dayjs/plugin/duration';
 import useAuthStore from '../store/authStore';
-// import 'rsuite/dist/rsuite.min.css';
-import { format } from 'rsuite/esm/internals/utils/date';
 
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
 
@@ -45,6 +43,7 @@ const BlockPage = () => {
       setTimeDiff('');
       return;
     }
+
     const [start_time, end_time] = Time;
 
     const timeDiffMilli = end_time.getTime() - start_time.getTime();
@@ -53,10 +52,6 @@ const BlockPage = () => {
     const minutes = totalMinutes % 60;
     const formattedDuration = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
     setTimeDiff(formattedDuration);
-
-    console.log(formattedDuration);
-    console.log(Time[0].toISOString());
-    console.log(Time[1].toISOString());
   };
 
   //startTimte 또는 goalTime이 변경될 때마다 시간 차이 계산
@@ -79,6 +74,7 @@ const BlockPage = () => {
     }
     setUrlList((prevList) => [...prevList, urlInput]);
     setUrlInput('');
+    console.log(urlList);
   };
 
   const handleBlock = () => {
@@ -118,6 +114,12 @@ const BlockPage = () => {
     }
   };
 
+  // url 삭제
+  const handleRemoveUrl = (index: number) => {
+    setUrlList((prevList) => prevList.filter((_, i) => i !== index));
+    console.log(urlList);
+  };
+
   // 드래그 오버 핸들러
   const handleDragOver = (e: React.DragEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -145,7 +147,7 @@ const BlockPage = () => {
               onChange={handleTimeChange}
               value={Time}
               cleanable={false}
-              className='w-[700px]'
+              size='sm'
             />
             <p className='w-[500px]'>{timeDiff}</p>
           </div>
@@ -184,6 +186,12 @@ const BlockPage = () => {
                     src={`https://www.google.com/s2/favicons?sz=32&domain_url=${url}`}
                   />
                   <p>{url}</p>
+                  <button
+                    onClick={() => handleRemoveUrl(index)}
+                    className='text-red-500 hover:text-red-700'
+                  >
+                    ✕
+                  </button>
                 </li>
               ))}
             </ul>
