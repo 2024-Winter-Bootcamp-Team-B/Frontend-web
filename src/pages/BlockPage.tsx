@@ -152,7 +152,7 @@ const BlockPage = () => {
               onChange={handleUrlChange}
               onDrop={handleDrop} // 드롭 이벤트 처리
               onDragOver={handleDragOver} // 드래그 오버 이벤트 처리
-              placeholder='URL 예시'
+              placeholder='예: www.focus-on-site.com'
               className='rounded-[30px] w-[1000px] h-12 p-6 placeholder:text-center'
               style={{
                 boxShadow:
