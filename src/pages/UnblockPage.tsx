@@ -48,7 +48,7 @@
 //   return (
 //     <div className='section h-full'>
 //       <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6 mt-11'>
-        
+
 //         {/* ProgressBar에 user_id 전달 */}
 //         {user_id && <ProgressBar userId={user_id} />}
 
@@ -86,11 +86,13 @@ const UnblockPage = () => {
   const containerRef = useRef<HTMLDivElement | null>(null); // 전체 컨테이너 참조
 
   const [blockedSites, setBlockedSites] = useState<string[]>([]); // 차단된 사이트 목록
-  const [iconPositions, setIconPositions] = useState<{ x: number; y: number }[]>([]); // 아이콘 위치
+  const [iconPositions, setIconPositions] = useState<
+    { x: number; y: number }[]
+  >([]); // 아이콘 위치
   const [, setIconVelocities] = useState<{ dx: number; dy: number }[]>([]); // 아이콘 속도
 
-   // 페이지 스크롤 비활성화
-   useEffect(() => {
+  // 페이지 스크롤 비활성화
+  useEffect(() => {
     document.body.style.overflow = 'hidden'; // 스크롤 비활성화
     return () => {
       document.body.style.overflow = 'auto'; // 컴포넌트가 언마운트될 때 복원
@@ -120,9 +122,15 @@ const UnblockPage = () => {
             // 감옥 안쪽으로 아이콘 초기 위치 제한
             setIconPositions(
               response.sites.map(() => ({
-                x: Math.random() * (jailWidth * 0.5) + jailLeft + jailWidth * 0.1, // 감옥 중앙 근처에서 X 랜덤
-                y: Math.random() * (jailHeight * 0.5) + jailTop + jailHeight * 0.001, // 감옥 중앙 근처에서 Y 랜덤
-              }))
+                x:
+                  Math.random() * (jailWidth * 0.5) +
+                  jailLeft +
+                  jailWidth * 0.1, // 감옥 중앙 근처에서 X 랜덤
+                y:
+                  Math.random() * (jailHeight * 0.5) +
+                  jailTop +
+                  jailHeight * 0.001, // 감옥 중앙 근처에서 Y 랜덤
+              })),
             );
           }
 
@@ -132,30 +140,42 @@ const UnblockPage = () => {
       .catch((error) => console.error('Error fetching blocked sites:', error));
   }, [user_id]);
 
+  // 차단해제 누르기 전 user_id 있는지 검사
+  const handleUnblockClick = () => {
+    if (user_id) {
+      navigate('/photo');
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
-    <div ref={containerRef} className="section h-full relative">
-      <div className="flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6 mt-11">
+    <div ref={containerRef} className='section h-full relative'>
+      <div className='flex flex-col items-center h-[calc(100%-2.75rem)] px-16 py-8 gap-6 mt-11'>
         {/* ProgressBar */}
         {user_id && <ProgressBar userId={user_id} />}
 
         <button
-          className="bg-white rounded-full self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden"
-          onClick={() => navigate('/photo')}
+          className='bg-white rounded-full self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden'
+          onClick={handleUnblockClick}
           style={{
             boxShadow:
               '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
           }}
         >
-          <span className="absolute h-15 top-0 left-0 w-0 h-full transition-all bg-focus-color opacity-100 group-hover:w-full duration-400 ease"></span>
-          <span className="relative">차단해제</span>
+          <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-focus-color opacity-100 group-hover:w-full duration-400 ease'></span>
+          <span className='relative'>차단해제</span>
         </button>
 
         {/* Jail 이미지와 아이콘 */}
-        <div ref={jailRef} className="relative flex justify-center items-center">
+        <div
+          ref={jailRef}
+          className='relative flex justify-center items-center'
+        >
           {/* 감옥 이미지 */}
           <img
             src={jail}
-            alt="Jail"
+            alt='Jail'
             style={{
               width: '5000px', // 감옥 너비
               height: 'auto', // 비율 유지
