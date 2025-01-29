@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { fetchSignUp, SignUpReq } from '../api/signUp';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
   const [id, setId] = useState<string>('');
@@ -7,6 +8,7 @@ const SignUpPage = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [repassword, setRepassword] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,6 +29,8 @@ const SignUpPage = () => {
       .then((response) => {
         if (response) {
           console.log(response);
+          alert('회원가입 성공');
+          navigate('/login');
         }
       })
       .catch((error) => console.error(error));

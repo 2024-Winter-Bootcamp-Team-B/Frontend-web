@@ -5,8 +5,8 @@ import { BlockReq, blockSites } from '../api/block';
 import { TimeRangePicker } from 'rsuite';
 import duration from 'dayjs/plugin/duration';
 import useAuthStore from '../store/authStore';
-// import 'rsuite/dist/rsuite.min.css';
-import { format } from 'rsuite/esm/internals/utils/date';
+import 'rsuite/dist/rsuite.min.css';
+
 
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
 
@@ -53,10 +53,6 @@ const BlockPage = () => {
     const minutes = totalMinutes % 60;
     const formattedDuration = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
     setTimeDiff(formattedDuration);
-
-    console.log(formattedDuration);
-    console.log(Time[0].toISOString());
-    console.log(Time[1].toISOString());
   };
 
   //startTimte 또는 goalTime이 변경될 때마다 시간 차이 계산
