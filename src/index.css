@@ -34,7 +34,7 @@
 
 /* 입력 필드 스타일 */
 .rs-picker-input-group .rs-input {
-  font-size: 96px !important; /* 글씨 크기 */
+  font-size: 80px !important; /* 글씨 크기 */
   text-align: center !important; /* 중앙 정렬 */
   line-height: normal !important;
   background: transparent !important; /* 배경 투명 (부모가 흰색이므로 투명 유지) */
