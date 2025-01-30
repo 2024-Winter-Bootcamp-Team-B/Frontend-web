@@ -7,6 +7,7 @@ import duration from 'dayjs/plugin/duration';
 import useAuthStore from '../store/authStore';
 import { useNavigate } from 'react-router-dom';
 import useBlockStore from '../store/blockStore';
+import useFullpageStore from '../store/fullpageStore';
 
 dayjs.extend(duration); // 시간 차이 계산을 위한 duration 플러그인 활성화
 
@@ -21,6 +22,7 @@ const BlockPage = () => {
   const { user_id } = useAuthStore();
   const { setBlockedSites } = useBlockStore();
   const navigate = useNavigate();
+  const fullpageApi = useFullpageStore((state) => state.fullpageApi);
 
   // 최고 빈도 사이트 5개 API
   useEffect(() => {
@@ -104,6 +106,7 @@ const BlockPage = () => {
         if (response) {
           console.log(response);
           setBlockedSites(urlList);
+          fullpageApi?.moveTo(4);
         }
       })
       .catch((error) => console.error(error));
