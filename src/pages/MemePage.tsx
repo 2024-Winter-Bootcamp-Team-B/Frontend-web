@@ -150,6 +150,10 @@ const MemePage = () => {
   }
   const [totalDuration, elapsedTime, percentage] = percentageData;
 
+  const handleMain = () => {
+    navigate('/#main');
+  };
+
   return (
     <div
       ref={containerRef}
@@ -163,11 +167,22 @@ const MemePage = () => {
             <p className='font-cinzel font-bold text-2xl'>FOCUS</p>
             <div className='bg-white w-full h-px self-center' />
           </div>
-          <div className='font-semibold text-4xl'>
+          <div className='font-semibold text-4xl flex flex-col relative w-full'>
             <p>전체 목표의 {percentage}%를 달성했습니다</p>
             <p>
               목표시간 {totalDuration}, 달성시간 {elapsedTime}
             </p>
+            <button
+              className='bg-white rounded-full top-11 self-center mt-auto text-xl px-12 py-4 hover:text-white group relative flex items-center overflow-hidden'
+              onClick={handleMain}
+              style={{
+                boxShadow:
+                  '0px 2px 8px 0px rgba(40, 41, 61, 0.08), 0px 20px 32px 0px rgba(96, 97, 112, 0.24)',
+              }}
+            >
+              <span className='absolute h-15 top-0 left-0 w-0 h-full transition-all bg-focus-color opacity-100 group-hover:w-full duration-400 ease'></span>
+              <span className='relative'>다시 한 번 차단하기</span>
+            </button>
           </div>
           {user_id && <ProgressBar userId={user_id} />}
           <div
