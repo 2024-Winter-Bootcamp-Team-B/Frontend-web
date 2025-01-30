@@ -72,7 +72,6 @@ const BlockPage = () => {
 
   const handleGoalTimeChange = (value: Date | null) => {
     setGoalTime(value || null);
-    console.log(goalTime);
   };
 
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,10 +93,32 @@ const BlockPage = () => {
       navigate('/login');
       return;
     }
+
+    // 🔹 API에 보낼 때 오늘 날짜 기준 UTC 변환
+    const today = new Date();
+    const startUtc = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+      startTime.getHours(),
+      startTime.getMinutes(),
+    );
+
+    const goalUtc = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+      goalTime.getHours(),
+      goalTime.getMinutes(),
+    );
+
+    console.log('API에 보낼 UTC Start Time:', startUtc.toISOString());
+    console.log('API에 보낼 UTC Goal Time:', goalUtc.toISOString());
+
     const block: BlockReq = {
       user_id,
-      start_time: startTime.toISOString(),
-      goal_time: goalTime.toISOString(),
+      start_time: startUtc.toISOString(),
+      goal_time: goalUtc.toISOString(),
       sites: urlList,
     };
 
