@@ -153,7 +153,7 @@ const BlockPage = () => {
         <div className='flex flex-col items-start h-full w-full px-16 py-8 gap-6'>
           {/* 오늘 날짜 표시 */}
           <p className='text-xl'>{today}</p>
-          <div className='flex justify-between gap-[720px]'>
+          <div className='flex justify-between gap-[915px]'>
             <p className='text-xl'>시간을 입력하세요</p>
             <p className='text-xl'>차단 지속 시간</p>
           </div>
@@ -163,7 +163,7 @@ const BlockPage = () => {
               value={startTime}
               cleanable={false}
               size='sm'
-              placeholder='00:00'
+              placeholder=''
             />
             <p>~</p>
             <TimePicker
@@ -171,9 +171,9 @@ const BlockPage = () => {
               value={goalTime}
               cleanable={false}
               size='sm'
-              placeholder='00:00'
+              placeholder=''
             />
-            <p className='w-[400px]'>{timeDiff}</p>
+            <p className='w-[400px] text-[80px]'>{timeDiff}</p>
           </div>
           <p className='text-xl'>URL을 입력하거나 아이콘을 드래그하세요</p>
           <div className='flex gap-4'>
