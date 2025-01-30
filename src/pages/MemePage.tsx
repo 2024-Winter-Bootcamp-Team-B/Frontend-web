@@ -9,7 +9,7 @@ import './MemePage.css';
 import {
   ProgressBar,
   DurationElapsedPercentage,
-} from '../components/ProgressBar';
+} from '../components/ProgressBarMeme';
 
 const MemePage = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const MemePage = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       navigate('/#main');
-    }, 10000); // 10초 후
+    }, 1000000); // 1000초 후
     return () => clearTimeout(timeout);
   }, [navigate]);
 
